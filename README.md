@@ -3,6 +3,9 @@
 This is intended to be a simpler Python client to the Olog. It has one class,
 ``Client``, with methods corresponding to each command in Olog's REST API.
 
+It includes automated tests that can be run without an Olog server, relying on
+cached server responses in the source tree.
+
 **It is not currently anywhere near feature-complete.**
 
 ## Installation
@@ -51,7 +54,8 @@ The tests can be run *without an Olog server*. The source tree contains
 serialized requests and responses that were captured during test execution
 against a real Olog server. (Authentication information has been filtered out.)
 If the requests issued during any test differ from those that were issued during
-the capture, the tests will fail.
+the capture, the tests will fail. See
+[VCR documentation](https://vcrpy.readthedocs.io) for details on this technique.
 
 Run tests:
 
