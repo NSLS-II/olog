@@ -35,9 +35,6 @@ environment variables.
 from olog import Client
 import os
 
-URL = 'https://<HOST>:<PORT>/Olog'
-USER = ...
-PASSWORD = ...
 cli = Client(os.eniron['OLOG_URL'],
              os.environ['USER'],
              os.environ['PASSWORD'])
