@@ -24,15 +24,19 @@ pip install -e .
 
 ## Usage
 
-Instantiate a Client:
+Instantiate a Client. We recommend passing authentication info through
+environment variables.
 
 ```python
 from olog import Client
+import os
 
 URL = 'https://<HOST>:<PORT>/Olog'
 USER = ...
 PASSWORD = ...
-cli = Client(URL, USER, PASSWORD)
+cli = Client(os.eniron['OLOG_URL'],
+             os.environ['USER'],
+             os.environ['PASSWORD'])
 ```
 
 Use the methods on the Client. For example:
