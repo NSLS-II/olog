@@ -3,7 +3,7 @@
 This is intended to be a simpler Python client to the Olog. It has one class,
 ``Client``, with methods corresponding to each command in Olog's REST API.
 
-**It is not currently anywhere near feature-complete, and it needs tests.**
+**It is not currently anywhere near feature-complete.**
 
 ## Installation
 
