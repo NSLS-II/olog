@@ -4,7 +4,8 @@ This is intended to be a simpler Python client to the Olog. It has one class,
 ``Client``, with methods corresponding to each command in Olog's REST API.
 
 It includes automated tests that can be run without an Olog server, relying on
-cached server responses in the source tree.
+previously recorded requests and responses in the source tree. (See later
+section for details.)
 
 **It is not currently anywhere near feature-complete.**
 
