@@ -18,9 +18,11 @@ vcr = _vcr.VCR(
 )
 
 
-url = os.environ['OLOG_URL']
-user = os.environ['OLOG_USER']
-password = os.environ['OLOG_PASSWORD']
+RECORDED_URL = "https://xf08ida-ioc1.cs.nsls2.local:9191/Olog"
+# Only required if we are re-recording for VCR.
+url = os.environ.get('OLOG_URL', RECORDED_URL)
+user = os.environ.get('OLOG_USER', '')
+password = os.environ.get('OLOG_PASSWORD', '')
 cli = olog.Client(url, user, password)
 
 
