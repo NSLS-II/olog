@@ -1,0 +1,61 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "GET",
+                "uri": "https://xf08ida-ioc1.cs.nsls2.local:9191/Olog/resources/logs/1",
+                "body": null,
+                "headers": {
+                    "User-Agent": [
+                        "python-requests/2.18.4"
+                    ],
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ],
+                    "accept": [
+                        "application/json"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Date": [
+                        "Fri, 09 Feb 2018 04:38:01 GMT"
+                    ],
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "X-Powered-By": [
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Oracle Corporation/1.7)"
+                    ]
+                },
+                "body": {
+                    "string": "{\"createdDate\":1442948513000,\"modifiedDate\":1442948513000,\"owner\":\"yhu\",\"source\":\"130.199.219.156\",\"version\":\"1\",\"description\":\"Just for tests\",\"logbooks\":[{\"owner\":null,\"id\":1,\"name\":\"Operations\",\"logs\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[],\"level\":\"Info\",\"state\":\"Active\",\"id\":1}"
+                }
+            }
+        }
+    ]
+}
