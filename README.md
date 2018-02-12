@@ -71,3 +71,9 @@ source .env
 rm -rf cassettes/*
 py.test test_olog.py
 ```
+
+## References
+
+This is based on
+[official Olog web service API documentation](https://github.com/Olog/olog-service/raw/master/doc/Release%20Notes%20and%20Manuals.docx)
+(a .docx file).
