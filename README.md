@@ -48,6 +48,8 @@ cli.list_logbooks()
 
 ## Running Tests
 
+### Simple case: without an Olog server
+
 The tests can be run *without an Olog server*. The source tree contains
 serialized requests and responses that were captured during test execution
 against a real Olog server. (Authentication information has been filtered out.)
@@ -60,6 +62,8 @@ Run tests:
 ```
 py.test test_olog.py
 ```
+
+### General case: with an Olog server
 
 If tests are added or changed in a way that alters the requests that they
 issue, the tests will need to be re-run with an Olog server.
@@ -87,6 +91,10 @@ Clear the recorded requests and responses and run the tests.
 
 ```
 rm -rf cassettes/*
+
+And finally, run the tests, same as in the simple case:
+
+```
 py.test test_olog.py
 ```
 
