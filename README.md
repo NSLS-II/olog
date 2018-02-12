@@ -91,6 +91,7 @@ Clear the recorded requests and responses and run the tests.
 
 ```
 rm -rf cassettes/*
+```
 
 And finally, run the tests, same as in the simple case:
 
