@@ -64,10 +64,28 @@ py.test test_olog.py
 If tests are added or changed in a way that alters the requests that they
 issue, the tests will need to be re-run with an Olog server.
 
+Start a development Olog server with Docker:
+
 ```
-cp .env.example .env
-# Fill auth information into .env file. Then:
-source .env
+git clone https://github.com/lnls-sirius/docker-olog-compose
+cd docker-olog-compose
+docker-compose up
+```
+
+Wait several minutes, and then test with curl:
+
+```
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X GET --insecure https://localhost:8181/Olog/resources/logbooks
+```
+
+(As we understand it, the ``--insecure`` flag is unfortunately necessary because
+Olog assumes it is being deployed without valid SSL certificates. We, the
+developers of this Python REST API wrapper, have flagged that issue to the
+developers of Olog server.)
+
+Clear the recorded requests and responses and run the tests.
+
+```
 rm -rf cassettes/*
 py.test test_olog.py
 ```
