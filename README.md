@@ -36,8 +36,8 @@ from olog import Client
 import os
 
 cli = Client(os.eniron['OLOG_URL'],
-             os.environ['USER'],
-             os.environ['PASSWORD'])
+             os.environ['OLOG_USER'],
+             os.environ['OLOG_PASSWORD'])
 ```
 
 Use the methods on the Client. For example:
