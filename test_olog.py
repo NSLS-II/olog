@@ -55,7 +55,10 @@ def test_list_logbooks():
 
 @vcr.use_cassette()
 def test_get_logbook():
-    cli.get_logbook(LOGBOOK_NAME)
+    expected = {'id': 1, 'logs': None, 'name': 'Operations', 'owner': None,
+                'state': 'Active'}
+    actual = cli.get_logbook(name=LOGBOOK_NAME)
+    assert actual == expected
 
 
 @vcr.use_cassette()
