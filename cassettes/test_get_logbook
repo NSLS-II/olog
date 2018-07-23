@@ -4,11 +4,11 @@
         {
             "request": {
                 "method": "GET",
-                "uri": "https://xf08ida-ioc1.cs.nsls2.local:9191/Olog/resources/logbooks/Operations",
+                "uri": "https://localhost:9992/Olog/resources/logbooks/Operations",
                 "body": null,
                 "headers": {
                     "User-Agent": [
-                        "python-requests/2.18.4"
+                        "python-requests/2.19.1"
                     ],
                     "Accept-Encoding": [
                         "gzip, deflate"
@@ -30,26 +30,26 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "Access-Control-Allow-Methods": [
-                        "GET, POST, PUT, DELETE, OPTIONS"
-                    ],
-                    "Server": [
-                        "GlassFish Server Open Source Edition 3.1.2.2"
-                    ],
                     "Access-Control-Allow-Origin": [
                         "*"
                     ],
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Date": [
+                        "Mon, 23 Jul 2018 14:24:21 GMT"
+                    ],
                     "X-Powered-By": [
-                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Oracle Corporation/1.7)"
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
                     ],
                     "Access-Control-Allow-Credentials": [
                         "true"
                     ],
-                    "Date": [
-                        "Fri, 09 Feb 2018 04:38:26 GMT"
-                    ],
-                    "Content-Type": [
-                        "application/json"
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
                     ]
                 },
                 "body": {

@@ -18,11 +18,11 @@ vcr = _vcr.VCR(
 )
 
 
-RECORDED_URL = "https://xf08ida-ioc1.cs.nsls2.local:9191/Olog"
+RECORDED_URL = "https://localhost:9992/Olog"
 # Only required if we are re-recording for VCR.
 url = os.environ.get('OLOG_URL', RECORDED_URL)
-user = os.environ.get('OLOG_USER', '')
-password = os.environ.get('OLOG_PASSWORD', '')
+user = os.environ.get('OLOG_USER', 'olog-user')
+password = os.environ.get('OLOG_PASSWORD', '1234')
 cli = olog.Client(url, user, password)
 
 
@@ -33,7 +33,24 @@ LOG_ID = 1
 
 @vcr.use_cassette()
 def test_list_logbooks():
-    cli.list_logbooks()
+    expected = {'logbook': [{'id': 2,
+       'logs': None,
+       'name': 'Electronics Maintenance',
+       'owner': None,
+       'state': 'Active'},
+      {'id': 4, 'logs': None, 'name': 'LOTO', 'owner': None, 'state': 'Active'},
+      {'id': 3,
+       'logs': None,
+       'name': 'Mechanical Technicians',
+       'owner': None,
+       'state': 'Active'},
+      {'id': 1,
+       'logs': None,
+       'name': 'Operations',
+       'owner': None,
+       'state': 'Active'}]}
+    actual = cli.list_logbooks()
+    assert actual == expected
 
 
 @vcr.use_cassette()

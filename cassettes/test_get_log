@@ -4,11 +4,11 @@
         {
             "request": {
                 "method": "GET",
-                "uri": "https://xf08ida-ioc1.cs.nsls2.local:9191/Olog/resources/logs/1",
+                "uri": "https://localhost:9992/Olog/resources/logs/1",
                 "body": null,
                 "headers": {
                     "User-Agent": [
-                        "python-requests/2.18.4"
+                        "python-requests/2.19.1"
                     ],
                     "Accept-Encoding": [
                         "gzip, deflate"
@@ -33,27 +33,27 @@
                     "Access-Control-Allow-Origin": [
                         "*"
                     ],
-                    "Date": [
-                        "Fri, 09 Feb 2018 04:38:01 GMT"
-                    ],
-                    "Server": [
-                        "GlassFish Server Open Source Edition 3.1.2.2"
-                    ],
-                    "Access-Control-Allow-Credentials": [
-                        "true"
-                    ],
                     "Access-Control-Allow-Methods": [
                         "GET, POST, PUT, DELETE, OPTIONS"
                     ],
                     "Content-Type": [
                         "application/json"
                     ],
+                    "Date": [
+                        "Mon, 23 Jul 2018 14:24:21 GMT"
+                    ],
                     "X-Powered-By": [
-                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Oracle Corporation/1.7)"
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
                     ]
                 },
                 "body": {
-                    "string": "{\"createdDate\":1442948513000,\"modifiedDate\":1442948513000,\"owner\":\"yhu\",\"source\":\"130.199.219.156\",\"version\":\"1\",\"description\":\"Just for tests\",\"logbooks\":[{\"owner\":null,\"id\":1,\"name\":\"Operations\",\"logs\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[],\"level\":\"Info\",\"state\":\"Active\",\"id\":1}"
+                    "string": "{\"createdDate\":1459083898000,\"modifiedDate\":1459083898000,\"owner\":\"olog-user\",\"source\":\"127.0.0.1\",\"version\":\"1\",\"description\":\"Creating the first simple entry.\\nInstructions for creating log entries\\nusername: olog-user\\npassword: 1234\\n\\n?????\",\"logbooks\":[{\"owner\":null,\"id\":1,\"name\":\"Operations\",\"logs\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[],\"level\":\"Info\",\"state\":\"Active\",\"id\":1}"
                 }
             }
         }

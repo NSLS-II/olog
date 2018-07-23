@@ -59,7 +59,7 @@ class Client:
 
     def put_logbook(self, logbook):
         """
-        Create or update a logbook (mathced by name).
+        Create or update a logbook (matched by name).
         """
         url = f'{self._url}/resources/logbooks/{logbook["name"]}'
         res = self._session.put(url, data=logbook)
