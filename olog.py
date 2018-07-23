@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 import requests
 import requests.auth
 
@@ -46,14 +47,17 @@ class Client:
         url = f'{self._url}/resources/logbooks/{name}'
         res = self._session.delete(url, **self._kwargs)
         res.raise_for_status()
-        return res.json()
+        # Remove .json() below since it returns
+        # "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+        return res
 
     def post_logbook(self, logbook):
         """
+        # TODO: check what it does, cannot create a logbook with the method
         Create a logbook.
         """
         url = f'{self._url}/resources/logbooks'
-        res = self._session.post(url, data=logbook)
+        res = self._session.post(url, data=logbook, **self._kwargs)
         res.raise_for_status()
         return res.json()
 
@@ -62,7 +66,7 @@ class Client:
         Create or update a logbook (matched by name).
         """
         url = f'{self._url}/resources/logbooks/{logbook["name"]}'
-        res = self._session.put(url, data=logbook)
+        res = self._session.put(url, data=json.dumps(logbook), **self._kwargs)
         res.raise_for_status()
         return res.json()
 
