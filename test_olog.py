@@ -22,8 +22,11 @@ RECORDED_URL = "https://localhost:9992/Olog"
 # Only required if we are re-recording for VCR.
 url = os.environ.get('OLOG_URL', RECORDED_URL)
 user = os.environ.get('OLOG_USER', 'olog-user')
+admin = os.environ.get('OLOG_ADMIN', 'olog-admin')
 password = os.environ.get('OLOG_PASSWORD', '1234')
-cli = olog.Client(url, user, password)
+
+user_cli = olog.Client(url, user, password)
+admin_cli = olog.Client(url, admin, password)
 
 
 # Various test parameters
@@ -51,7 +54,7 @@ def test_list_logbooks():
                              'name': 'Operations',
                              'owner': None,
                              'state': 'Active'}]}
-    actual = cli.list_logbooks()
+    actual = user_cli.list_logbooks()
     assert actual == expected
 
 
@@ -62,7 +65,7 @@ def test_get_logbook():
                 'name': 'Operations',
                 'owner': None,
                 'state': 'Active'}
-    actual = cli.get_logbook(name=LOGBOOK_NAME)
+    actual = user_cli.get_logbook(name=LOGBOOK_NAME)
     assert actual == expected
 
 
@@ -95,7 +98,7 @@ def test_list_logs_by_logbook():
                 'state': 'Active',
                 'tags': [],
                 'version': '1'}
-    actual = cli.list_logs(logbook=LOGBOOK_NAME)
+    actual = user_cli.list_logs(logbook=LOGBOOK_NAME)
     assert actual[0] == expected
 
 
@@ -118,5 +121,17 @@ def test_get_log():
                 'state': 'Active',
                 'tags': [],
                 'version': '1'}
-    actual = cli.get_log(LOG_ID)
+    actual = user_cli.get_log(LOG_ID)
     assert actual == expected
+
+
+@vcr.use_cassette()
+def test_create_logbook():
+    expected = {'id': 12,
+                'logs': None,
+                'name': 'Test',
+                'owner': 'test',
+                'state': 'Active'}
+    actual = admin_cli.put_logbook({'name': 'Test', 'owner': 'test'})
+    assert actual == expected
+    admin_cli.delete_logbook('Test')

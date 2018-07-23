@@ -30,26 +30,26 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "Access-Control-Allow-Origin": [
-                        "*"
-                    ],
-                    "Access-Control-Allow-Methods": [
-                        "GET, POST, PUT, DELETE, OPTIONS"
-                    ],
-                    "Content-Type": [
-                        "application/json"
-                    ],
-                    "Date": [
-                        "Mon, 23 Jul 2018 14:24:21 GMT"
-                    ],
-                    "X-Powered-By": [
-                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
-                    ],
                     "Access-Control-Allow-Credentials": [
                         "true"
                     ],
                     "Server": [
                         "GlassFish Server Open Source Edition 3.1.2.2"
+                    ],
+                    "X-Powered-By": [
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Date": [
+                        "Mon, 23 Jul 2018 23:55:03 GMT"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
                     ]
                 },
                 "body": {

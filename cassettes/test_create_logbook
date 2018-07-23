@@ -1,0 +1,141 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "PUT",
+                "uri": "https://localhost:9992/Olog/resources/logbooks/Test",
+                "body": "{\"name\": \"Test\", \"owner\": \"test\"}",
+                "headers": {
+                    "User-Agent": [
+                        "python-requests/2.19.1"
+                    ],
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ],
+                    "accept": [
+                        "application/json"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "Content-Length": [
+                        "33"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Pragma": [
+                        "No-cache"
+                    ],
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
+                    ],
+                    "X-Powered-By": [
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
+                    ],
+                    "Cache-Control": [
+                        "no-cache"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Expires": [
+                        "Wed, 31 Dec 1969 19:00:00 EST"
+                    ],
+                    "Date": [
+                        "Mon, 23 Jul 2018 23:55:03 GMT"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
+                    ]
+                },
+                "body": {
+                    "string": "{\"owner\":\"test\",\"id\":12,\"name\":\"Test\",\"logs\":null,\"state\":\"Active\"}"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "DELETE",
+                "uri": "https://localhost:9992/Olog/resources/logbooks/Test",
+                "body": null,
+                "headers": {
+                    "User-Agent": [
+                        "python-requests/2.19.1"
+                    ],
+                    "Accept-Encoding": [
+                        "gzip, deflate"
+                    ],
+                    "accept": [
+                        "application/json"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ]
+                }
+            },
+            "response": {
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                },
+                "headers": {
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Content-Length": [
+                        "0"
+                    ],
+                    "Pragma": [
+                        "No-cache"
+                    ],
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
+                    ],
+                    "X-Powered-By": [
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
+                    ],
+                    "Cache-Control": [
+                        "no-cache"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Expires": [
+                        "Wed, 31 Dec 1969 19:00:00 EST"
+                    ],
+                    "Date": [
+                        "Mon, 23 Jul 2018 23:55:03 GMT"
+                    ],
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
+                    ]
+                },
+                "body": {
+                    "string": ""
+                }
+            }
+        }
+    ]
+}
