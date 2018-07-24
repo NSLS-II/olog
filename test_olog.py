@@ -133,5 +133,7 @@ def test_create_logbook():
                 'owner': 'test',
                 'state': 'Active'}
     actual = admin_cli.put_logbook({'name': 'Test', 'owner': 'test'})
+    expected.pop('id')
+    actual.pop('id')
     assert actual == expected
     admin_cli.delete_logbook('Test')

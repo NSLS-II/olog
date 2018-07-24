@@ -33,35 +33,35 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "Access-Control-Allow-Credentials": [
-                        "true"
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
                     ],
                     "Pragma": [
                         "No-cache"
                     ],
-                    "Server": [
-                        "GlassFish Server Open Source Edition 3.1.2.2"
+                    "Expires": [
+                        "Wed, 31 Dec 1969 19:00:00 EST"
                     ],
                     "X-Powered-By": [
                         "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
                     ],
-                    "Cache-Control": [
-                        "no-cache"
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
+                    ],
+                    "Date": [
+                        "Tue, 24 Jul 2018 12:37:11 GMT"
                     ],
                     "Access-Control-Allow-Origin": [
                         "*"
                     ],
-                    "Content-Type": [
-                        "application/json"
+                    "Cache-Control": [
+                        "no-cache"
                     ],
-                    "Expires": [
-                        "Wed, 31 Dec 1969 19:00:00 EST"
-                    ],
-                    "Date": [
-                        "Mon, 23 Jul 2018 23:55:03 GMT"
-                    ],
-                    "Access-Control-Allow-Methods": [
-                        "GET, POST, PUT, DELETE, OPTIONS"
+                    "Access-Control-Allow-Credentials": [
+                        "true"
                     ]
                 },
                 "body": {
@@ -101,35 +101,35 @@
                     "message": "OK"
                 },
                 "headers": {
-                    "Access-Control-Allow-Credentials": [
-                        "true"
-                    ],
-                    "Content-Length": [
-                        "0"
+                    "Access-Control-Allow-Methods": [
+                        "GET, POST, PUT, DELETE, OPTIONS"
                     ],
                     "Pragma": [
                         "No-cache"
                     ],
-                    "Server": [
-                        "GlassFish Server Open Source Edition 3.1.2.2"
-                    ],
-                    "X-Powered-By": [
-                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
-                    ],
-                    "Cache-Control": [
-                        "no-cache"
-                    ],
-                    "Access-Control-Allow-Origin": [
-                        "*"
+                    "Content-Length": [
+                        "0"
                     ],
                     "Expires": [
                         "Wed, 31 Dec 1969 19:00:00 EST"
                     ],
-                    "Date": [
-                        "Mon, 23 Jul 2018 23:55:03 GMT"
+                    "X-Powered-By": [
+                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Sun Microsystems Inc./1.6)"
                     ],
-                    "Access-Control-Allow-Methods": [
-                        "GET, POST, PUT, DELETE, OPTIONS"
+                    "Server": [
+                        "GlassFish Server Open Source Edition 3.1.2.2"
+                    ],
+                    "Date": [
+                        "Tue, 24 Jul 2018 12:37:11 GMT"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Cache-Control": [
+                        "no-cache"
+                    ],
+                    "Access-Control-Allow-Credentials": [
+                        "true"
                     ]
                 },
                 "body": {

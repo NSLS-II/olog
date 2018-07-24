@@ -66,7 +66,7 @@ class Client:
         Create or update a logbook (matched by name).
         """
         url = f'{self._url}/resources/logbooks/{logbook["name"]}'
-        res = self._session.put(url, data=json.dumps(logbook), **self._kwargs)
+        res = self._session.put(url, json=logbook, **self._kwargs)
         res.raise_for_status()
         return res.json()
 
