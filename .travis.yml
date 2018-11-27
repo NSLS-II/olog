@@ -20,7 +20,10 @@ install:
   - pip install -r requirements.txt
   - pip install -r test-requirements.txt
   - pip install -v .
-  - pytest -vvvv test_olog.py
+  # - pytest -vvvv test_olog.py
+
+script:
+  - pytest
 
 after_script:
   - docker stop olog-server olog-mysql-db && docker rm olog-server olog-mysql-db
