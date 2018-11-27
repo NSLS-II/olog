@@ -96,7 +96,7 @@ rm -rf cassettes/*
 And finally, run the tests, same as in the simple case:
 
 ```
-py.test test_olog.py
+pytest test_olog.py
 ```
 
 ## References
