@@ -1,0 +1,24 @@
+language: python
+services: docker
+
+before_install:
+  - env | sort
+  - docker pull mrakitin/olog-mysql-db:latest
+  - docker pull mrakitin/olog-server:latest
+  - docker images
+  - wget -qO- 'https://raw.githubusercontent.com/mrakitin/docker-olog-server/nsls2/run-all.sh' | bash
+  - docker ps -a
+  - sleep 60
+
+install:
+  - python --version
+  - python -m site
+  - pip install -r requirements.txt
+  - pip install -r test-requirements.txt
+  - pip install -v .
+  - pytest -vvvv test_olog.py
+
+after_script:
+  - docker stop olog-server olog-mysql-db && docker rm olog-server olog-mysql-db
+  - docker ps -a
+  - docker images
