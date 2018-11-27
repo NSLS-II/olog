@@ -60,7 +60,7 @@ the capture, the tests will fail. See
 Run tests:
 
 ```
-py.test test_olog.py
+pytest test_olog.py
 ```
 
 ### General case: with an Olog server
