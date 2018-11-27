@@ -12,6 +12,7 @@ before_install:
   - wget -qO- 'https://raw.githubusercontent.com/mrakitin/docker-olog-server/nsls2/run-all.sh' | bash
   - docker ps -a
   - sleep 60
+  - docker ps -a
 
 install:
   - python --version
