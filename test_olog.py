@@ -43,7 +43,7 @@ def test_list_logbooks():
 
 def test_get_logbook():
     expected = {'id': 1,
-                'name': 'Operations',
+                'name': LOGBOOK_NAME,
                 'owner': None,
                 'state': 'Active'}
     actual = user_cli.get_logbook(name=LOGBOOK_NAME)
