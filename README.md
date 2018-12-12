@@ -48,21 +48,6 @@ cli.list_logbooks()
 
 ## Running Tests
 
-### Simple case: without an Olog server
-
-The tests can be run *without an Olog server*. The source tree contains
-serialized requests and responses that were captured during test execution
-against a real Olog server. (Authentication information has been filtered out.)
-If the requests issued during any test differ from those that were issued during
-the capture, the tests will fail. See
-[VCR documentation](https://vcrpy.readthedocs.io) for details on this technique.
-
-Run tests:
-
-```
-pytest test_olog.py
-```
-
 ### General case: with an Olog server
 
 If tests are added or changed in a way that alters the requests that they
@@ -86,12 +71,6 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X GET --
 Olog assumes it is being deployed without valid SSL certificates. We, the
 developers of this Python REST API wrapper, have flagged that issue to the
 developers of Olog server.)
-
-Clear the recorded requests and responses and run the tests.
-
-```
-rm -rf cassettes/*
-```
 
 And finally, run the tests, same as in the simple case:
 
