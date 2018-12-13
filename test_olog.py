@@ -4,9 +4,8 @@ from pathlib import Path
 import pytest
 
 
-RECORDED_URL = "https://localhost:8181/Olog"
-# Only required if we are re-recording for VCR.
-url = os.environ.get('OLOG_URL', RECORDED_URL)
+URL = "https://localhost:8181/Olog"
+url = os.environ.get('OLOG_URL', URL)
 user = os.environ.get('OLOG_USER', 'olog-user')
 admin = os.environ.get('OLOG_ADMIN', 'olog-admin')
 password = os.environ.get('OLOG_PASSWORD', '1234')
