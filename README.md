@@ -48,20 +48,17 @@ cli.list_logbooks()
 
 ## Running Tests
 
-### General case: with an Olog server
-
-If tests are added or changed in a way that alters the requests that they
-issue, the tests will need to be re-run with an Olog server.
-
 Start a development Olog server with Docker:
 
 ```
-git clone https://github.com/lnls-sirius/docker-olog-compose
-cd docker-olog-compose
-docker-compose up
+docker pull mrakitin/olog-mysql-db:latest
+docker pull mrakitin/olog-server:latest
+docker run -d --name=olog-mysql-db -e MYSQL_USER=olog_user -e MYSQL_ROOT_PASSWORD=password -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=olog mrakitin/olog-mysql-db:latest
+docker run -d --name=olog-server -p 4848:4848 -p 8181:8181 --link olog-mysql-db mrakitin/olog-server:latest asadmin --user=admin --passwordfile=/tmp/glassfishpwd start-domain -v
 ```
 
-Wait several minutes, and then test with curl:
+Wait at least 60 seconds for the server to start. Then, before running the
+Python tests, we suggest checking that the server is up using ``curl``:
 
 ```
 curl -H "Content-Type: application/json" -H "Accept: application/json" -X GET --insecure https://localhost:8181/Olog/resources/logbooks
@@ -72,10 +69,16 @@ Olog assumes it is being deployed without valid SSL certificates. We, the
 developers of this Python REST API wrapper, have flagged that issue to the
 developers of Olog server.)
 
-And finally, run the tests, same as in the simple case:
+Run the tests:
 
 ```
 pytest test_olog.py
+```
+
+Finally, to clean up docker when finished:
+
+```
+docker stop olog-server olog-mysql-db && docker rm olog-server olog-mysql-db
 ```
 
 ## References
