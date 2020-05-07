@@ -27,7 +27,7 @@ class Client:
         self._kwargs = dict(headers=headers, auth=auth)  # for every request
 
     def list_logbooks(self):
-        url = f'{self._url}/resources/logbooks'
+        url = f'{self._url}/logbooks'
         res = self._session.get(url, **self._kwargs)
         res.raise_for_status()
         return res.json()
@@ -35,7 +35,7 @@ class Client:
     def get_logbook(self, name):
         # Logbooks have an integer id, but this REST endpoint expects the
         # *name*.  It does not accept an id.
-        url = f'{self._url}/resources/logbooks/{name}'
+        url = f'{self._url}/logbooks/{name}'
         res = self._session.get(url, **self._kwargs)
         res.raise_for_status()
         return res.json()
@@ -43,7 +43,7 @@ class Client:
     def delete_logbook(self, name):
         # Logbooks have an integer id, but this REST endpoint expects the
         # *name*.  It does not accept an id.
-        url = f'{self._url}/resources/logbooks/{name}'
+        url = f'{self._url}/logbooks/{name}'
         res = self._session.delete(url, **self._kwargs)
         res.raise_for_status()
         return res.json()
@@ -52,7 +52,7 @@ class Client:
         """
         Create a logbook.
         """
-        url = f'{self._url}/resources/logbooks'
+        url = f'{self._url}/logbooks'
         res = self._session.post(url, data=logbook)
         res.raise_for_status()
         return res.json()
@@ -61,7 +61,7 @@ class Client:
         """
         Create or update a logbook (mathced by name).
         """
-        url = f'{self._url}/resources/logbooks/{logbook["name"]}'
+        url = f'{self._url}/logbooks/{logbook["name"]}'
         res = self._session.put(url, data=logbook)
         res.raise_for_status()
         return res.json()
@@ -80,13 +80,13 @@ class Client:
                            search=search,
                            start=start,
                            end=end))
-        url = f'{self._url}/resources/logs'
+        url = f'{self._url}/logs'
         res = self._session.get(url, params=params, **self._kwargs)
         res.raise_for_status()
         return res.json()
 
     def get_log(self, id):
-        url = f'{self._url}/resources/logs/{id}'
+        url = f'{self._url}/logs/{id}'
         res = self._session.get(url, **self._kwargs)
         res.raise_for_status()
         return res.json()
