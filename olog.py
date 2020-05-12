@@ -14,7 +14,7 @@ class Client:
         password : string
         """
         if url[-1] != '/':
-            url = url + '/'
+            url += '/'
         self._session = AsyncClient(base_url=url, auth=(user, password))
 
     # Logbooks
