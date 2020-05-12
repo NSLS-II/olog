@@ -13,7 +13,7 @@ class Client:
         user : string
         password : string
         """
-        if url[-1] != '/':
+        if not url.endswith('/'):
             url += '/'
         self._session = AsyncClient(base_url=url, auth=(user, password))
 
