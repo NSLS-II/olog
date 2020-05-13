@@ -1,5 +1,6 @@
-from httpx import AsyncClient
 import asyncio
+from httpx import AsyncClient
+from datetime import datetime
 
 
 __all__ = ['Client']
@@ -57,14 +58,55 @@ class Client:
         return asyncio.run(self.aput_logbook(logbook))
 
     # Logs
-    async def aget_logs(self, **params):
+    async def aget_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
+                        start=None, end=None, includeevents=None,
+                        logbooks=None, tags=None):
+        if isinstance(start, datetime):
+            start = start.timestamp()
+        if isinstance(end, datetime):
+            end = end.timestamp()
+        params = dict(desc=desc, fuzzy=fuzzy, phrase=phrase, owner=owner,
+                      start=start, end=end, includeevents=includeevents,
+                      logbooks=logbooks, tags=tags)
         async with self._session as api:
             res = await api.get('logs', params=params)
         res.raise_for_status()
         return res.json()
 
-    def get_logs(self, **params):
-        return asyncio.run(self.aget_logs(**params))
+    def get_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
+                 start=None, end=None, includeevents=None,
+                 logbooks=None, tags=None):
+        """
+        desc : a list of str
+            A list of keywords which are present in the log entry description
+
+        fuzzy : str
+            Allow fuzzy searches
+
+        phrase: str
+            Finds log entries with the exact same word/s
+
+        owner: str
+            Finds log entries with the given owner
+
+        start : class 'datetime.datetime'
+            Search for log entries created after given time instant
+
+        end : class 'datetime.datetime'
+            Search for log entries created before the given time instant
+
+        includeevents : class 'datetime.datetime'
+            A flag to include log event times when
+
+        tags : str
+            Search for log entries with at least one of the given tags
+
+        logbooks : str
+            Search for log entries with at least one of the given logbooks
+        """
+        return asyncio.run(self.aget_logs(desc, fuzzy, phrase, owner,
+                                          start, end, includeevents,
+                                          logbooks, tags))
 
     async def aget_log(self, id):
         async with self._session as api:
@@ -160,7 +202,8 @@ class Client:
 
     async def aput_property(self, property):
         async with self._session as api:
-            res = await api.put(f'properties/{property["name"]}',  json=property)
+            res = await api.put(f'properties/{property["name"]}',
+                                json=property)
         res.raise_for_status()
         return res.json()
 
