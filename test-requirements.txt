@@ -1,2 +1,2 @@
 pytest
-vcrpy
+git+https://github.com/herdigiorgi/vcrpy.git@httpx
