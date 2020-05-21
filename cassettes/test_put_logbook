@@ -3,9 +3,9 @@
     "interactions": [
         {
             "request": {
-                "method": "GET",
+                "method": "PUT",
                 "uri": "http://10.0.137.22:8080/Olog/logbooks/Operations",
-                "body": "",
+                "body": "{\"name\": \"Operations\", \"owner\": \"olog-logs\", \"state\": \"Active\"}",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -21,6 +21,12 @@
                     ],
                     "connection": [
                         "keep-alive"
+                    ],
+                    "content-length": [
+                        "63"
+                    ],
+                    "content-type": [
+                        "application/json"
                     ]
                 }
             },
@@ -31,11 +37,29 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
                     "content-type": [
                         "application/json;charset=UTF-8"
                     ],
+                    "expires": [
+                        "0"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
                     "date": [
                         "Thu, 21 May 2020 20:07:10 GMT"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
                     ]
                 },
                 "content": "{\"name\":\"Operations\",\"owner\":\"admin\",\"state\":\"Active\"}"

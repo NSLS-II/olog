@@ -1,0 +1,45 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "GET",
+                "uri": "http://10.0.137.22:8080/Olog/properties",
+                "body": "",
+                "headers": {
+                    "host": [
+                        "10.0.137.22:8080"
+                    ],
+                    "user-agent": [
+                        "python-httpx/0.12.1"
+                    ],
+                    "accept": [
+                        "*/*"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ]
+                }
+            },
+            "response": {
+                "status_code": 200,
+                "http_version": "HTTP/1.1",
+                "headers": {
+                    "via": [
+                        "1.1 tinyproxy (tinyproxy/1.8.3)"
+                    ],
+                    "date": [
+                        "Thu, 21 May 2020 20:07:10 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
+                    ]
+                },
+                "content": "[{\"name\":\"TEST6\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST2\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST1\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}]"
+            }
+        }
+    ]
+}

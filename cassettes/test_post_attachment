@@ -1,0 +1,69 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "uri": "http://10.0.137.22:8080/Olog/logs/attachments/1",
+                "body": "--b17c59e71651e76b3aa516effa996986\r\nContent-Disposition: form-data; name=\"file\"; filename=\"README.md\"\r\nContent-Type: application/octet-stream\r\n\r\n# pyolog2\n\nThis is intended to be a simpler Python client to the Olog. It has one class,\n``Client``, with methods corresponding to each command in Olog's REST API.\n\nIt includes automated tests that can be run without an Olog server, relying on\npreviously recorded requests and responses in the source tree. (See later\nsection for details.)\n\n**It is not currently anywhere near feature-complete.**\n\n## Installation\n\n```\ngit clone https://github.com/NSLS-II/pyolog2\ncd pyolog2\npip install -r requirements.txt\npip install .\n```\n\nOr, for a development installation:\n\n```\npip install -r requirements.txt\npip install -r test-requirements.txt\npip install -e .\n```\n\n## Usage\n\nInstantiate a Client. We recommend passing authentication info through\nenvironment variables.\n\n```python\nfrom olog import Client\nimport os\n\ncli = Client(os.eniron['OLOG_URL'],\n             os.environ['OLOG_USER'],\n             os.environ['OLOG_PASSWORD'])\n```\n\nUse the methods on the Client. For example:\n\n```\ncli.list_logbooks()\n```\n\n## Running Tests\n\n### Simple case: without an Olog server\n\nThe tests can be run *without an Olog server*. The source tree contains\nserialized requests and responses that were captured during test execution\nagainst a real Olog server. (Authentication information has been filtered out.)\nIf the requests issued during any test differ from those that were issued during\nthe capture, the tests will fail. See\n[VCR documentation](https://vcrpy.readthedocs.io) for details on this technique.\n\nRun tests:\n\n```\npy.test test_olog.py\n```\n\n### General case: with an Olog server\n\nIf tests are added or changed in a way that alters the requests that they\nissue, the tests will need to be re-run with an Olog server.\n\nStart a development Olog server with Docker:\n\n```\ngit clone https://github.com/lnls-sirius/docker-olog-compose\ncd docker-olog-compose\ndocker-compose up\n```\n\nWait several minutes, and then test with curl:\n\n```\ncurl -H \"Content-Type: application/json\" -H \"Accept: application/json\" -X GET --insecure https://localhost:8181/Olog/resources/logbooks\n```\n\n(As we understand it, the ``--insecure`` flag is unfortunately necessary because\nOlog assumes it is being deployed without valid SSL certificates. We, the\ndevelopers of this Python REST API wrapper, have flagged that issue to the\ndevelopers of Olog server.)\n\nClear the recorded requests and responses and run the tests.\n\n```\nrm -rf cassettes/*\n```\n\nAnd finally, run the tests, same as in the simple case:\n\n```\npy.test test_olog.py\n```\n\n## References\n\nThis is based on\n[official Olog web service API documentation](https://github.com/Olog/olog-service/raw/master/doc/Release%20Notes%20and%20Manuals.docx)\n(a .docx file).\n\r\n--b17c59e71651e76b3aa516effa996986\r\nContent-Disposition: form-data; name=\"filename\"\r\n\r\ntest\r\n--b17c59e71651e76b3aa516effa996986\r\nContent-Disposition: form-data; name=\"fileMetadataDescription\"\r\n\r\nThis is a attachment\r\n--b17c59e71651e76b3aa516effa996986--\r\n",
+                "headers": {
+                    "host": [
+                        "10.0.137.22:8080"
+                    ],
+                    "user-agent": [
+                        "python-httpx/0.12.1"
+                    ],
+                    "accept": [
+                        "*/*"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ],
+                    "content-length": [
+                        "3079"
+                    ],
+                    "content-type": [
+                        "multipart/form-data; boundary=b17c59e71651e76b3aa516effa996986"
+                    ]
+                }
+            },
+            "response": {
+                "status_code": 200,
+                "http_version": "HTTP/1.1",
+                "headers": {
+                    "via": [
+                        "1.1 tinyproxy (tinyproxy/1.8.3)"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "expires": [
+                        "0"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "date": [
+                        "Thu, 21 May 2020 20:07:10 GMT"
+                    ],
+                    "content-length": [
+                        "0"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
+                    ]
+                },
+                "content": ""
+            }
+        }
+    ]
+}
