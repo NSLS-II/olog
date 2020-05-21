@@ -37,14 +37,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ],
                     "date": [
-                        "Thu, 21 May 2020 20:07:11 GMT"
+                        "Thu, 21 May 2020 20:56:01 GMT"
                     ],
                     "pragma": [
                         "no-cache"
@@ -55,11 +52,14 @@
                     "x-frame-options": [
                         "DENY"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
                     ],
                     "content-type": [
                         "application/json;charset=UTF-8"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
                     ]
                 },
                 "content": "{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"

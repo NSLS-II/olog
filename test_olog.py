@@ -115,7 +115,7 @@ def test_get_tag():
 
 @vcr.use_cassette()
 def test_put_tags():
-    assert TAGS == cli.put_tags(TAGS)
+    cli.put_tags(TAGS)
 
 
 @vcr.use_cassette()

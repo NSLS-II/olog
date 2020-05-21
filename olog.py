@@ -44,7 +44,7 @@ class Client:
         async with self._session as api:
             res = await api.put('logbooks', json=logbooks)
         res.raise_for_status()
-        return res.json()
+        return None
 
     def put_logbooks(self, logbooks):
         return asyncio.run(self.aput_logbooks(logbooks))
@@ -144,7 +144,7 @@ class Client:
         async with self._session as api:
             res = await api.post(f'logs/attachments/{id}', files=files)
         res.raise_for_status()
-        return res.status_code
+        return None
 
     def post_attachment(self, id, files):
         return asyncio.run(self.apost_attachment(id, files))
@@ -172,7 +172,7 @@ class Client:
         async with self._session as api:
             res = await api.put('tags', json=tags)
         res.raise_for_status()
-        return res.json()
+        return None
 
     def put_tags(self, tags):
         return asyncio.run(self.aput_tags(tags))
@@ -211,7 +211,7 @@ class Client:
         async with self._session as api:
             res = await api.put('properties', json=properties)
         res.raise_for_status()
-        return res.json()
+        return None
 
     def put_properties(self, properties):
         return asyncio.run(self.aput_properties(properties))
