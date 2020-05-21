@@ -1,7 +1,8 @@
 import asyncio
-from httpx import AsyncClient
+from collections import OrderedDict
 from datetime import datetime
 
+from httpx import AsyncClient
 
 __all__ = ['Client']
 
@@ -51,23 +52,36 @@ class Client:
     async def aput_logbook(self, logbook):
         async with self._session as api:
             res = await api.put(f'logbooks/{logbook["name"]}',  json=logbook)
-        res.raise_for_status()
-        return res.json()
+            logbook_from_server = res.json()
+            logbook_from_server.pop('owner')
+            logbook.pop('owner')
+        if (not res.raise_for_status()) and (logbook != logbook_from_server):
+            raise ValueError("No http error was raised but server doesn't \
+                             successfully put logbook you want")
+        return None
 
     def put_logbook(self, logbook):
         return asyncio.run(self.aput_logbook(logbook))
 
     # Logs
+    def ensure_time(self, input):
+        if isinstance(input, datetime):
+            return input.isoformat(sep=' ', timespec='milliseconds')
+        else:
+            d = datetime.strptime(input, '%Y-%m-%d %H:%M:%S.%f')
+            return d.isoformat(sep=' ', timespec='milliseconds')
+
     async def aget_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
                         start=None, end=None, includeevents=None,
-                        logbooks=None, tags=None):
-        if isinstance(start, datetime):
-            start = start.timestamp()
-        if isinstance(end, datetime):
-            end = end.timestamp()
+                        logbooks=None, tags=None, properties=None):
+        if start:
+            start = self.ensure_time(start)
+        if end:
+            end = self.ensure_time(end)
         params = dict(desc=desc, fuzzy=fuzzy, phrase=phrase, owner=owner,
                       start=start, end=end, includeevents=includeevents,
-                      logbooks=logbooks, tags=tags)
+                      logbooks=logbooks, tags=tags, properties=properties)
+        params = {k: v for k, v in params.items() if v is not None}
         async with self._session as api:
             res = await api.get('logs', params=params)
         res.raise_for_status()
@@ -75,7 +89,7 @@ class Client:
 
     def get_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
                  start=None, end=None, includeevents=None,
-                 logbooks=None, tags=None):
+                 logbooks=None, tags=None, properties=None):
         """
         desc : a list of str
             A list of keywords which are present in the log entry description
@@ -166,8 +180,10 @@ class Client:
     async def aput_tag(self, tag):
         async with self._session as api:
             res = await api.put(f'tags/{tag["name"]}',  json=tag)
-        res.raise_for_status()
-        return res.json()
+        if (not res.raise_for_status()) and (tag != res.json()):
+            raise ValueError("No http error was raised \
+                             but server doesn't successfully put tag you want")
+        return None
 
     def put_tag(self, tag):
         return asyncio.run(self.aput_tag(tag))
@@ -204,8 +220,16 @@ class Client:
         async with self._session as api:
             res = await api.put(f'properties/{property["name"]}',
                                 json=property)
-        res.raise_for_status()
-        return res.json()
+            property_from_server = res.json()
+            property_from_server.pop('owner')
+            property.pop('owner')
+            property['attributes'] = sorted(property['attributes'],
+                                            key=lambda d: d['name'])
+        if (not res.raise_for_status()) and \
+           (OrderedDict(property) != property_from_server):
+            raise ValueError("No http error was raised but server \
+                             doesn't successfully put property you want")
+        return None
 
     def put_property(self, property):
         return asyncio.run(self.aput_property(property))
