@@ -7,6 +7,14 @@ from httpx import AsyncClient
 __all__ = ['Client']
 
 
+def ensure_time(time):
+    if isinstance(time, datetime):
+        return time.isoformat(sep=' ', timespec='milliseconds')
+    else:
+        d = datetime.strptime(time, '%Y-%m-%d %H:%M:%S.%f')
+        return d.isoformat(sep=' ', timespec='milliseconds')
+
+
 class Client:
     def __init__(self, url, user, password):
         """
@@ -62,20 +70,14 @@ class Client:
         return asyncio.run(self.aput_logbook(logbook))
 
     # Logs
-    def ensure_time(self, input):
-        if isinstance(input, datetime):
-            return input.isoformat(sep=' ', timespec='milliseconds')
-        else:
-            d = datetime.strptime(input, '%Y-%m-%d %H:%M:%S.%f')
-            return d.isoformat(sep=' ', timespec='milliseconds')
 
     async def aget_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
                         start=None, end=None, includeevents=None,
                         logbooks=None, tags=None, properties=None):
-        if start:
-            start = self.ensure_time(start)
-        if end:
-            end = self.ensure_time(end)
+        if start is not None:
+            start = ensure_time(start)
+        if end is not None:
+            end = ensure_time(end)
         params = dict(desc=desc, fuzzy=fuzzy, phrase=phrase, owner=owner,
                       start=start, end=end, includeevents=includeevents,
                       logbooks=logbooks, tags=tags, properties=properties)
