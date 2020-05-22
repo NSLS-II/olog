@@ -44,7 +44,6 @@ class Client:
         async with self._session as api:
             res = await api.put('logbooks', json=logbooks)
         res.raise_for_status()
-        return None
 
     def put_logbooks(self, logbooks):
         return asyncio.run(self.aput_logbooks(logbooks))
@@ -58,7 +57,6 @@ class Client:
         if (not res.raise_for_status()) and (logbook != logbook_from_server):
             raise ValueError("No http error was raised but server doesn't \
                              successfully put logbook you want")
-        return None
 
     def put_logbook(self, logbook):
         return asyncio.run(self.aput_logbook(logbook))
@@ -144,7 +142,6 @@ class Client:
         async with self._session as api:
             res = await api.post(f'logs/attachments/{id}', files=files)
         res.raise_for_status()
-        return None
 
     def post_attachment(self, id, files):
         return asyncio.run(self.apost_attachment(id, files))
@@ -172,7 +169,6 @@ class Client:
         async with self._session as api:
             res = await api.put('tags', json=tags)
         res.raise_for_status()
-        return None
 
     def put_tags(self, tags):
         return asyncio.run(self.aput_tags(tags))
@@ -183,7 +179,6 @@ class Client:
         if (not res.raise_for_status()) and (tag != res.json()):
             raise ValueError("No http error was raised \
                              but server doesn't successfully put tag you want")
-        return None
 
     def put_tag(self, tag):
         return asyncio.run(self.aput_tag(tag))
@@ -211,7 +206,6 @@ class Client:
         async with self._session as api:
             res = await api.put('properties', json=properties)
         res.raise_for_status()
-        return None
 
     def put_properties(self, properties):
         return asyncio.run(self.aput_properties(properties))
@@ -229,7 +223,6 @@ class Client:
            (OrderedDict(property) != property_from_server):
             raise ValueError("No http error was raised but server \
                              doesn't successfully put property you want")
-        return None
 
     def put_property(self, property):
         return asyncio.run(self.aput_property(property))
