@@ -199,10 +199,7 @@ def test_ensure_time():
         # The code below will calculate the  diff(hours) between where the
         # code being execuated and GMT. Then correct it in assert.
         local = datetime.fromtimestamp(0).hour
-        if local > 12:
-            diff = local - 24
-        else:
-            diff = local
-        assert '2015-01-01 00:00:00.000' == olog.ensure_time(time + diff*3600)
+        diff = local - 24 if local > 12 else local
+        assert '2015-01-01 00:00:00.000' == olog.ensure_time(time - diff*3600)
     with pytest.raises(ValueError):
         olog.ensure_time('ABC')
