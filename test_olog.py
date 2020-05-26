@@ -1,6 +1,8 @@
 import olog
 import os
+from datetime import datetime
 from pathlib import Path
+import pytest
 import vcr as _vcr
 
 
@@ -60,6 +62,10 @@ ATTACHMENT_FILE = {'file': open('README.md', 'rb'),
                    'fileMetadataDescription': (None, 'This is a attachment')}
 ATTACHMENT_NAME = ATTACHMENT_FILE['filename'][1]
 
+DATETIME_START = '2015-01-01 00:00:00.123456'
+DATETIME_END = '2020-01-01 00:00:00.123456'
+DATETIME_OBJ = datetime(2015, 1, 1, 0, 0, 0, 123456)
+
 
 @vcr.use_cassette()
 def test_get_logbooks():
@@ -82,10 +88,22 @@ def test_put_logbook():
 
 
 @vcr.use_cassette()
-def test_get_logs():
+def test_put_logbook_with_error():
+    # vcr will return a wrong logbook
+    with pytest.raises(ValueError):
+        cli.put_logbook(LOGBOOK)
+
+
+@vcr.use_cassette()
+def test_get_logs_by_logbooks():
     logs = cli.get_logs(logbooks=LOGBOOK_NAME)
     for log in logs:
         assert LOGBOOK_NAME == log['logbooks'][0]['name']
+
+
+@vcr.use_cassette()
+def test_get_logs_by_time():
+    cli.get_logs(start=DATETIME_START, end=DATETIME_END)
 
 
 @vcr.use_cassette()
@@ -124,6 +142,13 @@ def test_put_tag():
 
 
 @vcr.use_cassette()
+def test_put_tag_with_error():
+    # vcr will return a wrong tag
+    with pytest.raises(ValueError):
+        cli.put_tag(TAG)
+
+
+@vcr.use_cassette()
 def test_get_properties():
     cli.get_properties()
 
@@ -141,3 +166,15 @@ def test_put_properties():
 @vcr.use_cassette()
 def test_put_property():
     cli.put_property(PROPERTY)
+
+
+@vcr.use_cassette()
+def test_put_property_with_error():
+    # vcr will return a wrong logbook
+    with pytest.raises(ValueError):
+        cli.put_property(PROPERTY)
+
+
+def test_ensure_time():
+    assert '2015-01-01 00:00:00.123' == olog.ensure_time(DATETIME_OBJ)
+    assert '2015-01-01 00:00:00.123' == olog.ensure_time(DATETIME_START)

@@ -61,8 +61,10 @@ class Client:
             res = await api.put(f'logbooks/{logbook["name"]}',  json=logbook)
             logbook_from_server = res.json()
             logbook_from_server.pop('owner')
-            logbook.pop('owner')
-        if (not res.raise_for_status()) and (logbook != logbook_from_server):
+            logbook_cp = logbook.copy()
+            logbook_cp.pop('owner')
+        if (not res.raise_for_status()) and \
+                (logbook_cp != logbook_from_server):
             raise ValueError("No http error was raised but server doesn't \
                              successfully put logbook you want")
 
@@ -218,11 +220,12 @@ class Client:
                                 json=property)
             property_from_server = res.json()
             property_from_server.pop('owner')
-            property.pop('owner')
-            property['attributes'] = sorted(property['attributes'],
-                                            key=lambda d: d['name'])
+            property_cp = property.copy()
+            property_cp.pop('owner')
+            property_cp['attributes'] = sorted(property_cp['attributes'],
+                                               key=lambda d: d['name'])
         if (not res.raise_for_status()) and \
-           (OrderedDict(property) != property_from_server):
+           (OrderedDict(property_cp) != property_from_server):
             raise ValueError("No http error was raised but server \
                              doesn't successfully put property you want")
 
