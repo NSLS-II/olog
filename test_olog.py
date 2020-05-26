@@ -78,8 +78,8 @@ TIME_INPUTS = [
         '2015-01',
         '2015',
         date(2015, 1, 1),
-        1420088400.0,
-        1420088400]
+        1420070400.0,
+        1420070400]
 
 
 @vcr.use_cassette()
@@ -191,7 +191,18 @@ def test_put_property_with_error():
 
 
 def test_ensure_time():
-    for time in TIME_INPUTS:
+    for time in TIME_INPUTS[:-2]:
         assert '2015-01-01 00:00:00.000' == olog.ensure_time(time)
+    for time in TIME_INPUTS[-2:]:
+        # fromtimestamp() return local time. In this test case, timestamp and
+        # datetime given match in GMT which is +5 hours comparing to UTC.
+        # The code below will calculate the  diff(hours) between where the
+        # code being execuated and GMT. Then correct it in assert.
+        local = datetime.fromtimestamp(0).hour
+        if local > 12:
+            diff = local - 24
+        else:
+            diff = local
+        assert '2015-01-01 00:00:00.000' == olog.ensure_time(time + diff*3600)
     with pytest.raises(ValueError):
         olog.ensure_time('ABC')
