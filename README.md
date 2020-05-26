@@ -8,8 +8,6 @@ It includes automated tests that can be run without an Olog server, relying on
 previously recorded requests and responses in the source tree. (See later
 section for details.)
 
-**It is not currently anywhere near feature-complete.**
-
 ## Installation
 
 ```
@@ -70,6 +68,6 @@ pytest test_olog.py
 
 ## References
 
-This is based on
-[Official Olog web service API documentation](https://olog-es.readthedocs.io/en/latest/)
+[Official Olog web service API documentation](https://olog-es.readthedocs.io/en/latest/).
+
 [Archived Olog web service API documentation](https://github.com/Olog/olog-service/raw/master/doc/Release%20Notes%20and%20Manuals.docx)(a .docx file).
