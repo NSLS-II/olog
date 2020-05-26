@@ -1,10 +1,11 @@
-import olog
 import os
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
+
 import pytest
 import vcr as _vcr
 
+import olog
 
 # This stashes Olog server responses in JSON files (one per test)
 # so that an actual server does not have to be running.
@@ -62,9 +63,23 @@ ATTACHMENT_FILE = {'file': open('README.md', 'rb'),
                    'fileMetadataDescription': (None, 'This is a attachment')}
 ATTACHMENT_NAME = ATTACHMENT_FILE['filename'][1]
 
-DATETIME_START = '2015-01-01 00:00:00.123456'
-DATETIME_END = '2020-01-01 00:00:00.123456'
-DATETIME_OBJ = datetime(2015, 1, 1, 0, 0, 0, 123456)
+DATETIME_OBJ = datetime(2015, 1, 1, 0, 0, 0)
+DATETIME_START = '2015-01-01 00:00:00.000123'
+DATETIME_END = '2020-01-01 00:00:00.000123'
+
+TIME_INPUTS = [
+        DATETIME_OBJ,
+        DATETIME_START,
+        '2015-01-01 00:00:00.000123',
+        '2015-01-01 00:00:00',
+        '2015-01-01 00:00',
+        '2015-01-01 00',
+        '2015-01-01',
+        '2015-01',
+        '2015',
+        date(2015, 1, 1),
+        1420088400.0,
+        1420088400]
 
 
 @vcr.use_cassette()
@@ -176,5 +191,7 @@ def test_put_property_with_error():
 
 
 def test_ensure_time():
-    assert '2015-01-01 00:00:00.123' == olog.ensure_time(DATETIME_OBJ)
-    assert '2015-01-01 00:00:00.123' == olog.ensure_time(DATETIME_START)
+    for time in TIME_INPUTS:
+        assert '2015-01-01 00:00:00.000' == olog.ensure_time(time)
+    with pytest.raises(ValueError):
+        olog.ensure_time('ABC')
