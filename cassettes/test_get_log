@@ -4,57 +4,41 @@
         {
             "request": {
                 "method": "GET",
-                "uri": "https://xf08ida-ioc1.cs.nsls2.local:9191/Olog/resources/logs/1",
-                "body": null,
+                "uri": "http://10.0.137.22:8080/Olog/logs/1",
+                "body": "",
                 "headers": {
-                    "User-Agent": [
-                        "python-requests/2.18.4"
+                    "host": [
+                        "10.0.137.22:8080"
                     ],
-                    "Accept-Encoding": [
-                        "gzip, deflate"
+                    "user-agent": [
+                        "python-httpx/0.12.1"
                     ],
                     "accept": [
-                        "application/json"
+                        "*/*"
                     ],
-                    "Connection": [
+                    "accept-encoding": [
+                        "gzip, deflate"
+                    ],
+                    "connection": [
                         "keep-alive"
-                    ],
-                    "content-type": [
-                        "application/json"
                     ]
                 }
             },
             "response": {
-                "status": {
-                    "code": 200,
-                    "message": "OK"
-                },
+                "status_code": 200,
+                "http_version": "HTTP/1.1",
                 "headers": {
-                    "Access-Control-Allow-Origin": [
-                        "*"
+                    "via": [
+                        "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "Date": [
-                        "Fri, 09 Feb 2018 04:38:01 GMT"
+                    "date": [
+                        "Thu, 21 May 2020 20:56:01 GMT"
                     ],
-                    "Server": [
-                        "GlassFish Server Open Source Edition 3.1.2.2"
-                    ],
-                    "Access-Control-Allow-Credentials": [
-                        "true"
-                    ],
-                    "Access-Control-Allow-Methods": [
-                        "GET, POST, PUT, DELETE, OPTIONS"
-                    ],
-                    "Content-Type": [
-                        "application/json"
-                    ],
-                    "X-Powered-By": [
-                        "Servlet/3.0 JSP/2.2 (GlassFish Server Open Source Edition 3.1.2.2 Java/Oracle Corporation/1.7)"
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ]
                 },
-                "body": {
-                    "string": "{\"createdDate\":1442948513000,\"modifiedDate\":1442948513000,\"owner\":\"yhu\",\"source\":\"130.199.219.156\",\"version\":\"1\",\"description\":\"Just for tests\",\"logbooks\":[{\"owner\":null,\"id\":1,\"name\":\"Operations\",\"logs\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[],\"level\":\"Info\",\"state\":\"Active\",\"id\":1}"
-                }
+                "content": "{\"id\":1,\"owner\":\"testOwner1\",\"source\":\"\",\"description\":\"Beam Dump due to Major power dip Current Alarms Booster transmitter switched back to lower state.\",\"level\":\"Info\",\"state\":null,\"createdDate\":1583531745249,\"modifyDate\":null,\"events\":null,\"logbooks\":[{\"name\":\"Operations\",\"owner\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[{\"id\":\"5ebaf938c2f801413862add0\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5ebc60cfc2f801413862add4\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5ec6d967c2f80121cc915a75\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5eb60642c2f801413862adca\",\"filename\":\"seven\",\"fileMetadataDescription\":\"This is seventh attachment file\"},{\"id\":\"5ebb0a9fc2f801413862add2\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5ec6d92fc2f80121cc915a73\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5eb456e4c2f801413862adbf\",\"filename\":\"README.md\",\"fileMetadataDescription\":\"This is first attachment file\"},{\"id\":\"5ec6df6fc2f80121cc915a77\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is a attachment\"}]}"
             }
         }
     ]

@@ -4,7 +4,7 @@
         {
             "request": {
                 "method": "GET",
-                "uri": "http://10.0.137.22:8080/Olog/logbooks/Operations",
+                "uri": "http://10.0.137.22:8080/Olog/logs/attachments/1/test",
                 "body": "",
                 "headers": {
                     "host": [
@@ -31,14 +31,14 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "content-length": [
+                        "0"
                     ],
                     "date": [
                         "Thu, 21 May 2020 20:56:01 GMT"
                     ]
                 },
-                "content": "{\"name\":\"Operations\",\"owner\":\"admin\",\"state\":\"Active\"}"
+                "content": ""
             }
         }
     ]

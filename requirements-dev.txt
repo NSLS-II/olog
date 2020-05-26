@@ -1,0 +1,5 @@
+codecov
+coverage
+flake8
+git+https://github.com/herdigiorgi/vcrpy.git@httpx
+pytest

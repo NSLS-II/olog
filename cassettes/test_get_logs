@@ -1,0 +1,45 @@
+{
+    "version": 1,
+    "interactions": [
+        {
+            "request": {
+                "method": "GET",
+                "uri": "http://10.0.137.22:8080/Olog/logs?logbooks=Operations",
+                "body": "",
+                "headers": {
+                    "host": [
+                        "10.0.137.22:8080"
+                    ],
+                    "user-agent": [
+                        "python-httpx/0.12.1"
+                    ],
+                    "accept": [
+                        "*/*"
+                    ],
+                    "accept-encoding": [
+                        "gzip, deflate"
+                    ],
+                    "connection": [
+                        "keep-alive"
+                    ]
+                }
+            },
+            "response": {
+                "status_code": 200,
+                "http_version": "HTTP/1.1",
+                "headers": {
+                    "via": [
+                        "1.1 tinyproxy (tinyproxy/1.8.3)"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
+                    ],
+                    "date": [
+                        "Thu, 21 May 2020 20:56:01 GMT"
+                    ]
+                },
+                "content": "[{\"id\":2,\"owner\":null,\"source\":\"\",\"description\":\"Beam Dump due to Major power dip Current Alarms Booster transmitter switched back to lower state.\",\"level\":\"Info\",\"state\":null,\"createdDate\":1583531806896,\"modifyDate\":null,\"events\":null,\"logbooks\":[{\"name\":\"Operations\",\"owner\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[{\"id\":\"5eb47b13c2f801413862adc0\",\"filename\":\"README.md\",\"fileMetadataDescription\":\"This is second attachment file\"}]},{\"id\":1,\"owner\":\"testOwner1\",\"source\":\"\",\"description\":\"Beam Dump due to Major power dip Current Alarms Booster transmitter switched back to lower state.\",\"level\":\"Info\",\"state\":null,\"createdDate\":1583531745249,\"modifyDate\":null,\"events\":null,\"logbooks\":[{\"name\":\"Operations\",\"owner\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[{\"id\":\"5ebb0a9fc2f801413862add2\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5ebaf938c2f801413862add0\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5eb60642c2f801413862adca\",\"filename\":\"seven\",\"fileMetadataDescription\":\"This is seventh attachment file\"},{\"id\":\"5ec6df6fc2f80121cc915a77\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is a attachment\"},{\"id\":\"5ec6d92fc2f80121cc915a73\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5eb456e4c2f801413862adbf\",\"filename\":\"README.md\",\"fileMetadataDescription\":\"This is first attachment file\"},{\"id\":\"5ec6d967c2f80121cc915a75\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"},{\"id\":\"5ebc60cfc2f801413862add4\",\"filename\":\"test\",\"fileMetadataDescription\":\"This is test attachment file\"}]},{\"id\":3,\"owner\":null,\"source\":\"\",\"description\":\"mrakitin test\",\"level\":\"Info\",\"state\":null,\"createdDate\":1587674374209,\"modifyDate\":null,\"events\":null,\"logbooks\":[{\"name\":\"Operations\",\"owner\":null,\"state\":\"Active\"}],\"tags\":[],\"properties\":[],\"attachments\":[{\"id\":\"5eb5aa37c2f801413862adc4\",\"filename\":\"README.md\",\"fileMetadataDescription\":\"This is forth attachment file\"},{\"id\":\"5eb62207c2f801413862adcc\",\"filename\":\"six\",\"fileMetadataDescription\":\"This is sixth attachment file\"},{\"id\":\"5eb6227dc2f801413862adce\",\"filename\":\"nine\",\"fileMetadataDescription\":\"This is ninth attachment file\"},{\"id\":\"5eb5abacc2f801413862adc6\",\"filename\":\"README.md\",\"fileMetadataDescription\":\"This is fifth attachment file\"},{\"id\":\"5eb5a2c2c2f801413862adc2\",\"filename\":\"README.md\",\"fileMetadataDescription\":\"This is third attachment file\"},{\"id\":\"5eb5ad73c2f801413862adc8\",\"filename\":\"six\",\"fileMetadataDescription\":\"This is sixth attachment file\"}]}]"
+            }
+        }
+    ]
+}
