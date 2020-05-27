@@ -62,7 +62,7 @@
                         "nosniff"
                     ]
                 },
-                "content": "{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
+                "content": "{\"name\":\"Ticket\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
             }
         }
     ]
