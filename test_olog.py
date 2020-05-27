@@ -185,7 +185,9 @@ def test_put_property():
 
 @vcr.use_cassette()
 def test_put_property_with_error():
-    # vcr will return a wrong logbook
+    # vcr will return a wrong logbook because the recorded
+    # response has been manually edited to be inconsistent
+    # with the request to exercise this code path
     with pytest.raises(ValueError):
         cli.put_property(PROPERTY)
 
