@@ -158,7 +158,9 @@ def test_put_tag():
 
 @vcr.use_cassette()
 def test_put_tag_with_error():
-    # vcr will return a wrong tag
+    # vcr will return a wrong tag because the recorded
+    # response has been manually edited to be inconsistent
+    # with the request to exercise this code path
     with pytest.raises(ValueError):
         cli.put_tag(TAG)
 
