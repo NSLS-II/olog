@@ -1,18 +1,43 @@
 import asyncio
 from collections import OrderedDict
-from datetime import datetime
+from datetime import date, datetime
 
 from httpx import AsyncClient
 
 __all__ = ['Client']
 
+_TS_FORMATS = [
+    '%Y-%m-%d %H:%M:%S.%f',
+    '%Y-%m-%d %H:%M:%S',
+    '%Y-%m-%d %H:%M',  # these 2 are not as originally doc'd,
+    '%Y-%m-%d %H',     # but match previous pandas behavior
+    '%Y-%m-%d',
+    '%Y-%m',
+    '%Y']
+
 
 def ensure_time(time):
     if isinstance(time, datetime):
-        return time.isoformat(sep=' ', timespec='milliseconds')
+        pass
+    elif isinstance(time, date):
+        time = datetime.fromisoformat(time.isoformat())
+    elif isinstance(time, float) or isinstance(time, int):
+        time = datetime.fromtimestamp(time)
     else:
-        d = datetime.strptime(time, '%Y-%m-%d %H:%M:%S.%f')
-        return d.isoformat(sep=' ', timespec='milliseconds')
+        for fmt in _TS_FORMATS:
+            try:
+                time = datetime.strptime(time, fmt)
+                break
+            except ValueError:
+                pass
+        else:
+            raise ValueError("Your time is in wrong format.")
+
+    return time.isoformat(sep=' ', timespec='milliseconds')
+
+
+class UncaughtServerError(Exception):
+    pass
 
 
 class Client:
@@ -25,7 +50,15 @@ class Client:
         """
         if not url.endswith('/'):
             url += '/'
-        self._session = AsyncClient(base_url=url, auth=(user, password))
+        self.user = user
+        self._session = AsyncClient(base_url=url, auth=(self.user, password))
+
+    def check_owner(self, d):
+        # This function checks whether value of 'owner' match user of client.
+        # It has to be true based on server requirments.
+        if 'owner' in d and d['owner'] != self.user:
+            raise ValueError(f"Server only accept current user: {self.user} as \
+                             value of owner")
 
     # Logbooks
     async def aget_logbooks(self):
@@ -57,20 +90,26 @@ class Client:
         return asyncio.run(self.aput_logbooks(logbooks))
 
     async def aput_logbook(self, logbook):
+        self.check_owner(logbook)
         async with self._session as api:
             res = await api.put(f'logbooks/{logbook["name"]}',  json=logbook)
-            logbook_from_server = res.json()
-            logbook_from_server.pop('owner')
-            logbook.pop('owner')
-        if (not res.raise_for_status()) and (logbook != logbook_from_server):
-            raise ValueError("No http error was raised but server doesn't \
-                             successfully put logbook you want")
+        res.raise_for_status()
+        # The server returned OK. Its response contains a copy of what it
+        # inserted into its database. We can compare it with our submission for
+        # extra verification that everything worked correctly.
+        logbook_from_server = res.json()
+        logbook_cp = logbook.copy()
+        if logbook_cp != logbook_from_server:
+            raise UncaughtServerError(f"No http error was raised but server \
+                                      doesn't successfully put logbook you \
+                                      want. Server put {res.json()} while you \
+                                      are tring to put {logbook}.")
+        return res.json()
 
     def put_logbook(self, logbook):
         return asyncio.run(self.aput_logbook(logbook))
 
     # Logs
-
     async def aget_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
                         start=None, end=None, includeevents=None,
                         logbooks=None, tags=None, properties=None):
@@ -178,9 +217,16 @@ class Client:
     async def aput_tag(self, tag):
         async with self._session as api:
             res = await api.put(f'tags/{tag["name"]}',  json=tag)
-        if (not res.raise_for_status()) and (tag != res.json()):
-            raise ValueError("No http error was raised \
-                             but server doesn't successfully put tag you want")
+        res.raise_for_status()
+        # The server returned OK. Its response contains a copy of what it
+        # inserted into its database. We can compare it with our submission for
+        # extra verification that everything worked correctly.
+        if tag != res.json():
+            raise UncaughtServerError(f"No http error was raised but server \
+                                      doesn't successfully put tag you want.\
+                                      Server put {res.json()} while you are \
+                                      tring to put {tag}.")
+        return res.json()
 
     def put_tag(self, tag):
         return asyncio.run(self.aput_tag(tag))
@@ -213,18 +259,24 @@ class Client:
         return asyncio.run(self.aput_properties(properties))
 
     async def aput_property(self, property):
+        self.check_owner(property)
         async with self._session as api:
             res = await api.put(f'properties/{property["name"]}',
                                 json=property)
-            property_from_server = res.json()
-            property_from_server.pop('owner')
-            property.pop('owner')
-            property['attributes'] = sorted(property['attributes'],
-                                            key=lambda d: d['name'])
-        if (not res.raise_for_status()) and \
-           (OrderedDict(property) != property_from_server):
-            raise ValueError("No http error was raised but server \
-                             doesn't successfully put property you want")
+        res.raise_for_status()
+        # The server returned OK. Its response contains a copy of what it
+        # inserted into its database. We can compare it with our submission for
+        # extra verification that everything worked correctly.
+        property_from_server = res.json()
+        property_cp = property.copy()
+        property_cp['attributes'] = sorted(property_cp['attributes'],
+                                           key=lambda d: d['name'])
+        if OrderedDict(property_cp) != property_from_server:
+            raise UncaughtServerError(f"No http error was raised but server \
+                                      doesn't successfully put property you \
+                                      want. Server puts {res.json()} while \
+                                      you are tring to put {property}.")
+        return res.json()
 
     def put_property(self, property):
         return asyncio.run(self.aput_property(property))

@@ -1,13 +1,12 @@
 # pyolog2
 
-This is intended to be a simpler Python client to the Olog. It has one class,
+This is Python client of the new rewritten
+[Olog](https://olog-es.readthedocs.io/en/latest/). It has one class,
 ``Client``, with methods corresponding to each command in Olog's REST API.
 
 It includes automated tests that can be run without an Olog server, relying on
 previously recorded requests and responses in the source tree. (See later
 section for details.)
-
-**It is not currently anywhere near feature-complete.**
 
 ## Installation
 
@@ -22,7 +21,7 @@ Or, for a development installation:
 
 ```
 pip install -r requirements.txt
-pip install -r test-requirements.txt
+pip install -r requirements-dev.txt
 pip install -e .
 ```
 
@@ -43,7 +42,7 @@ cli = Client(os.eniron['OLOG_URL'],
 Use the methods on the Client. For example:
 
 ```
-cli.list_logbooks()
+cli.get_logbooks()
 ```
 
 ## Running Tests
@@ -60,47 +59,15 @@ the capture, the tests will fail. See
 Run tests:
 
 ```
-py.test test_olog.py
+pytest test_olog.py
 ```
 
 ### General case: with an Olog server
 
-If tests are added or changed in a way that alters the requests that they
-issue, the tests will need to be re-run with an Olog server.
-
-Start a development Olog server with Docker:
-
-```
-git clone https://github.com/lnls-sirius/docker-olog-compose
-cd docker-olog-compose
-docker-compose up
-```
-
-Wait several minutes, and then test with curl:
-
-```
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X GET --insecure https://localhost:8181/Olog/resources/logbooks
-```
-
-(As we understand it, the ``--insecure`` flag is unfortunately necessary because
-Olog assumes it is being deployed without valid SSL certificates. We, the
-developers of this Python REST API wrapper, have flagged that issue to the
-developers of Olog server.)
-
-Clear the recorded requests and responses and run the tests.
-
-```
-rm -rf cassettes/*
-```
-
-And finally, run the tests, same as in the simple case:
-
-```
-py.test test_olog.py
-```
+"TO DO: Document how to stand up a new Olog server for testing."
 
 ## References
 
-This is based on
-[official Olog web service API documentation](https://github.com/Olog/olog-service/raw/master/doc/Release%20Notes%20and%20Manuals.docx)
-(a .docx file).
+[Official Olog web service API documentation](https://olog-es.readthedocs.io/en/latest/).
+
+[Archived Olog web service API documentation](https://github.com/Olog/olog-service/raw/master/doc/Release%20Notes%20and%20Manuals.docx)(a .docx file).

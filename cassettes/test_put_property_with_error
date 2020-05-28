@@ -4,8 +4,8 @@
         {
             "request": {
                 "method": "PUT",
-                "uri": "http://10.0.137.22:8080/Olog/logbooks/Operations",
-                "body": "{\"name\": \"Operations\", \"owner\": \"olog-logs\", \"state\": \"Active\"}",
+                "uri": "http://10.0.137.22:8080/Olog/properties/Ticket",
+                "body": "{\"name\": \"Ticket\", \"owner\": \"olog-logs\", \"state\": \"Active\", \"attributes\": [{\"name\": \"url\", \"value\": null, \"state\": \"Active\"}, {\"name\": \"id\", \"value\": null, \"state\": \"Active\"}]}",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,7 +23,7 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "63"
+                        "176"
                     ],
                     "content-type": [
                         "application/json"
@@ -37,32 +37,32 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ],
                     "date": [
                         "Thu, 21 May 2020 20:56:01 GMT"
                     ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
+                    "pragma": [
+                        "no-cache"
                     ],
                     "expires": [
                         "0"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
                     "x-frame-options": [
                         "DENY"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ],
                     "x-content-type-options": [
                         "nosniff"
                     ]
                 },
-                "content": "{\"name\":\"Operations\",\"owner\":\"olog-logs\",\"state\":\"Active\"}"
+                "content": "{\"name\":\"A_WRONG_NAME\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
             }
         }
     ]

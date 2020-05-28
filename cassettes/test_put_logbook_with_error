@@ -62,7 +62,7 @@
                         "nosniff"
                     ]
                 },
-                "content": "{\"name\":\"Operations\",\"owner\":\"olog-logs\",\"state\":\"Active\"}"
+                "content": "{\"name\":\"A_WRONG_NAME\",\"owner\":\"admin\",\"state\":\"Active\"}"
             }
         }
     ]

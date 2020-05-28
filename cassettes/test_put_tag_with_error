@@ -4,8 +4,8 @@
         {
             "request": {
                 "method": "PUT",
-                "uri": "http://10.0.137.22:8080/Olog/logbooks/Operations",
-                "body": "{\"name\": \"Operations\", \"owner\": \"olog-logs\", \"state\": \"Active\"}",
+                "uri": "http://10.0.137.22:8080/Olog/tags/Fault",
+                "body": "{\"name\": \"Fault\", \"state\": \"Active\"}",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,7 +23,7 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "63"
+                        "36"
                     ],
                     "content-type": [
                         "application/json"
@@ -37,8 +37,17 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
                     ],
                     "date": [
                         "Thu, 21 May 2020 20:56:01 GMT"
@@ -49,20 +58,11 @@
                     "expires": [
                         "0"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "x-frame-options": [
-                        "DENY"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ]
                 },
-                "content": "{\"name\":\"Operations\",\"owner\":\"olog-logs\",\"state\":\"Active\"}"
+                "content": "{\"name\":\"A_WRONG_NAME\",\"state\":\"Active\"}"
             }
         }
     ]

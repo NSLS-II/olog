@@ -1,8 +1,11 @@
-import olog
 import os
+from datetime import date, datetime
 from pathlib import Path
+
+import pytest
 import vcr as _vcr
 
+from olog import Client, UncaughtServerError, ensure_time
 
 # This stashes Olog server responses in JSON files (one per test)
 # so that an actual server does not have to be running.
@@ -20,9 +23,9 @@ vcr = _vcr.VCR(
 RECORDED_URL = "http://10.0.137.22:8080/Olog"
 # Only required if we are re-recording for VCR.
 url = os.environ.get('OLOG_URL', RECORDED_URL)
-user = os.environ.get('OLOG_USER', '')
+user = os.environ.get('OLOG_USER', 'olog-logs')
 password = os.environ.get('OLOG_PASSWORD', '')
-cli = olog.Client(url, user, password)
+cli = Client(url, user, password)
 
 
 # Various test parameters
@@ -31,6 +34,8 @@ LOG_ID = 1
 LOGBOOKS = [{'name': 'Operations', 'owner': 'olog-logs', 'state': 'Active'},
             {'name': 'TEST', 'owner': 'olog-logs', 'state': 'Active'}]
 LOGBOOK = {'name': 'Operations', 'owner': 'olog-logs', 'state': 'Active'}
+INVALID_LOGBOOK = {'name': 'Operations', 'owner': 'invalid_name',
+                   'state': 'Active'}
 LOGBOOK_NAME = 'Operations'
 
 PROPS = [{'name': 'Ticket',
@@ -48,6 +53,13 @@ PROPERTY = {'name': 'Ticket',
             'state': 'Active',
             'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
                            {'name': 'id', 'value': None, 'state': 'Active'}]}
+INVALID_PROPERTY = {'name': 'Ticket',
+                    'owner': 'invalid_name',
+                    'state': 'Active',
+                    'attributes': [{'name': 'url', 'value': None,
+                                    'state': 'Active'},
+                                   {'name': 'id', 'value': None,
+                                    'state': 'Active'}]}
 PROPERTY_NAME = 'Ticket'
 
 TAGS = [{'name': 'Fault', 'state': 'Active'},
@@ -59,6 +71,24 @@ ATTACHMENT_FILE = {'file': open('README.md', 'rb'),
                    'filename': (None, 'test'),
                    'fileMetadataDescription': (None, 'This is a attachment')}
 ATTACHMENT_NAME = ATTACHMENT_FILE['filename'][1]
+
+DATETIME_OBJ = datetime(2015, 1, 1, 0, 0, 0)
+DATETIME_START = '2015-01-01 00:00:00.000123'
+DATETIME_END = '2020-01-01 00:00:00.000123'
+
+TIME_INPUTS = [
+        DATETIME_OBJ,
+        DATETIME_START,
+        '2015-01-01 00:00:00.000123',
+        '2015-01-01 00:00:00',
+        '2015-01-01 00:00',
+        '2015-01-01 00',
+        '2015-01-01',
+        '2015-01',
+        '2015',
+        date(2015, 1, 1),
+        1420070400.0,
+        1420070400]
 
 
 @vcr.use_cassette()
@@ -79,13 +109,30 @@ def test_put_logbooks():
 @vcr.use_cassette()
 def test_put_logbook():
     cli.put_logbook(LOGBOOK)
+    with pytest.raises(ValueError):
+        cli.put_logbook(INVALID_LOGBOOK)
 
 
 @vcr.use_cassette()
-def test_get_logs():
+def test_put_logbook_with_error():
+    # extra verification that everything worked correctly.
+    # vcr will return a wrong logbook because the recorded
+    # response has been manually edited to be inconsistent
+    # with the request to exercise this code path
+    with pytest.raises(UncaughtServerError):
+        cli.put_logbook(LOGBOOK)
+
+
+@vcr.use_cassette()
+def test_get_logs_by_logbooks():
     logs = cli.get_logs(logbooks=LOGBOOK_NAME)
     for log in logs:
         assert LOGBOOK_NAME == log['logbooks'][0]['name']
+
+
+@vcr.use_cassette()
+def test_get_logs_by_time():
+    cli.get_logs(start=DATETIME_START, end=DATETIME_END)
 
 
 @vcr.use_cassette()
@@ -124,6 +171,15 @@ def test_put_tag():
 
 
 @vcr.use_cassette()
+def test_put_tag_with_error():
+    # vcr will return a wrong tag because the recorded
+    # response has been manually edited to be inconsistent
+    # with the request to exercise this code path
+    with pytest.raises(UncaughtServerError):
+        cli.put_tag(TAG)
+
+
+@vcr.use_cassette()
 def test_get_properties():
     cli.get_properties()
 
@@ -141,3 +197,29 @@ def test_put_properties():
 @vcr.use_cassette()
 def test_put_property():
     cli.put_property(PROPERTY)
+    with pytest.raises(ValueError):
+        cli.put_logbook(INVALID_PROPERTY)
+
+
+@vcr.use_cassette()
+def test_put_property_with_error():
+    # vcr will return a wrong property because the recorded
+    # response has been manually edited to be inconsistent
+    # with the request to exercise this code path
+    with pytest.raises(UncaughtServerError):
+        cli.put_property(PROPERTY)
+
+
+def test_ensure_time():
+    for time in TIME_INPUTS[:-2]:
+        assert '2015-01-01 00:00:00.000' == ensure_time(time)
+    for time in TIME_INPUTS[-2:]:
+        # fromtimestamp() return local time. In this test case, timestamp and
+        # datetime given match in GMT which is +5 hours comparing to UTC.
+        # The code below will calculate the  diff(hours) between where the
+        # code being execuated and GMT. Then correct it in assert.
+        local = datetime.fromtimestamp(0).hour
+        diff = local - 24 if local > 12 else local
+        assert '2015-01-01 00:00:00.000' == ensure_time(time - diff*3600)
+    with pytest.raises(ValueError):
+        ensure_time('ABC')
