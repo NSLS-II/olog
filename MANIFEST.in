@@ -1,0 +1,2 @@
+include versioneer.py
+include olog/_version.py
