@@ -1,5 +1,5 @@
 from ._version import get_versions
-from .olog import Client
+from .httpx_client import Client
 
 __all__ = ['Client']
 
