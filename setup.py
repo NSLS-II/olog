@@ -3,7 +3,7 @@ import versioneer
 import sys
 
 
-min_version = (3, 6)
+min_version = (3, 7)
 
 if sys.version_info < min_version:
     error = """
@@ -33,8 +33,8 @@ setup(
     python_requires='>={}'.format('.'.join(str(n) for n in min_version)),
     install_requires=requirements,
     classifiers=[
-        'License :: OSI Approved :: BSD License',
         'Development Status :: 4 - Beta',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'
     ]
 )
