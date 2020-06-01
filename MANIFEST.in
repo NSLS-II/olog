@@ -1,2 +1,5 @@
-include versioneer.py
+include LICENSE
 include olog/_version.py
+include README.md
+include requirements.txt
+include versioneer.py
