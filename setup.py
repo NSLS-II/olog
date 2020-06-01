@@ -7,7 +7,7 @@ min_version = (3, 7)
 
 if sys.version_info < min_version:
     error = """
-databroker does not support Python {0}.{1}.
+pyolog does not support Python {0}.{1}.
 Python {2}.{3} and above is required. Check your Python version like so:
 
 python3 --version
