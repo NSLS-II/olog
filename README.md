@@ -1,4 +1,4 @@
-# pyolog2
+# olog
 
 This is Python client of the new rewritten
 [Olog](https://olog-es.readthedocs.io/en/latest/). It has one class,
@@ -11,8 +11,8 @@ section for details.)
 ## Installation
 
 ```
-git clone https://github.com/NSLS-II/pyolog2
-cd pyolog2
+git clone https://github.com/NSLS-II/olog
+cd olog
 pip install -r requirements.txt
 pip install .
 ```

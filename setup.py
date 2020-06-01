@@ -23,12 +23,12 @@ with open('requirements.txt') as f:
     requirements = f.read().split()
 
 setup(
-    name='pyolog2',
+    name='olog',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     license="BSD (3-clause)",
     author='Brookhaven National Laboratory',
-    url="https://github.com/NSLS-II/pyolog2",
+    url="https://github.com/NSLS-II/olog",
     packages=find_packages(),
     python_requires='>={}'.format('.'.join(str(n) for n in min_version)),
     install_requires=requirements,
