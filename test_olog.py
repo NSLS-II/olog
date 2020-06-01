@@ -5,7 +5,8 @@ from pathlib import Path
 import pytest
 import vcr as _vcr
 
-from olog import Client, UncaughtServerError, ensure_time
+from olog.httpx_client import Client
+from olog.util import UncaughtServerError, ensure_time
 
 # This stashes Olog server responses in JSON files (one per test)
 # so that an actual server does not have to be running.

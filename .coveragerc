@@ -1,0 +1,10 @@
+[run]
+source = olog
+
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
+    # ignore _version.py and versioneer.py
+    .*version.*
+    *_version.py
