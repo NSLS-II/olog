@@ -63,8 +63,7 @@ INVALID_PROPERTY = {'name': 'Ticket',
                                     'state': 'Active'}]}
 PROPERTY_NAME = 'Ticket'
 
-TAGS = [{'name': 'Fault', 'state': 'Active'},
-        {'name': 'TEST', 'state': 'Active'}]
+TAG_NAMES = ['Fault', 'TEST']
 TAG = {'name': 'Fault', 'state': 'Active'}
 TAG_NAME = 'Fault'
 
@@ -124,6 +123,11 @@ def test_put_logbook_with_error():
         cli.put_logbook(LOGBOOK)
 
 
+def test_get_logs_by_keyword_only_arguments():
+    with pytest.raises(TypeError):
+        cli.get_logs(LOGBOOK_NAME)
+
+
 @vcr.use_cassette()
 def test_get_logs_by_logbooks():
     logs = cli.get_logs(logbooks=LOGBOOK_NAME)
@@ -163,21 +167,12 @@ def test_get_tag():
 
 @vcr.use_cassette()
 def test_put_tags():
-    cli.put_tags(TAGS)
+    cli.put_tags(TAG_NAMES)
 
 
 @vcr.use_cassette()
 def test_put_tag():
-    cli.put_tag(TAG)
-
-
-@vcr.use_cassette()
-def test_put_tag_with_error():
-    # vcr will return a wrong tag because the recorded
-    # response has been manually edited to be inconsistent
-    # with the request to exercise this code path
-    with pytest.raises(UncaughtServerError):
-        cli.put_tag(TAG)
+    cli.put_tag(TAG_NAME)
 
 
 @vcr.use_cassette()
