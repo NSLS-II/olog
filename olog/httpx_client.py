@@ -92,7 +92,7 @@ class Client:
         res.raise_for_status()
         return res.json()
 
-    def get_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
+    def get_logs(self, *, desc=None, fuzzy=None, phrase=None, owner=None,
                  start=None, end=None, includeevents=None,
                  logbooks=None, tags=None, properties=None):
         """
