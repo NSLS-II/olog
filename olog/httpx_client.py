@@ -172,30 +172,22 @@ class Client:
     def get_tag(self, name):
         return asyncio.run(self.aget_tag(name))
 
-    async def aput_tags(self, tags):
+    async def aput_tags(self, names):
         async with self._session as api:
-            res = await api.put('tags', json=tags)
+            res = await api.put('tags', json=[{'name': n} for n in names])
         res.raise_for_status()
 
-    def put_tags(self, tags):
-        return asyncio.run(self.aput_tags(tags))
+    def put_tags(self, names):
+        return asyncio.run(self.aput_tags(names))
 
-    async def aput_tag(self, tag):
+    async def aput_tag(self, name):
         async with self._session as api:
-            res = await api.put(f'tags/{tag["name"]}',  json=tag)
+            res = await api.put(f'tags/{name}', json={'name': name})
         res.raise_for_status()
-        # The server returned OK. Its response contains a copy of what it
-        # inserted into its database. We can compare it with our submission for
-        # extra verification that everything worked correctly.
-        if tag != res.json():
-            raise UncaughtServerError(f"No http error was raised but server \
-                                      doesn't successfully put tag you want.\
-                                      Server put {res.json()} while you are \
-                                      tring to put {tag}.")
         return res.json()
 
-    def put_tag(self, tag):
-        return asyncio.run(self.aput_tag(tag))
+    def put_tag(self, name):
+        return asyncio.run(self.aput_tag(name))
 
     # Properties
     async def aget_properties(self):
