@@ -30,9 +30,15 @@ def ensure_time(time):
     return time.isoformat(sep=' ', timespec='milliseconds')
 
 
-def reconstruct_by_name(d):
-    d.pop('name')
-    return {'name': d}
+def check_name(name):
+    if not isinstance(name, str):
+        raise TypeError(f'name should be a str, {name} is not a str.')
+    return name
+
+
+def simplify_attr(d):
+    d['attributes'] = {e['name']: e['value'] for e in d['attributes']}
+    return d
 
 
 class UncaughtServerError(Exception):

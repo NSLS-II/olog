@@ -54,6 +54,7 @@ PROPERTY = {'name': 'Ticket',
             'state': 'Active',
             'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
                            {'name': 'id', 'value': None, 'state': 'Active'}]}
+PROPERTY_ATTRIBUTES = {'url': None, 'id': None}
 INVALID_PROPERTY = {'name': 'Ticket',
                     'owner': 'invalid_name',
                     'state': 'Active',
@@ -192,9 +193,7 @@ def test_put_properties():
 
 @vcr.use_cassette()
 def test_put_property():
-    cli.put_property(PROPERTY)
-    with pytest.raises(ValueError):
-        cli.put_logbook(INVALID_PROPERTY)
+    cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
 
 
 @vcr.use_cassette()
@@ -203,7 +202,7 @@ def test_put_property_with_error():
     # response has been manually edited to be inconsistent
     # with the request to exercise this code path
     with pytest.raises(UncaughtServerError):
-        cli.put_property(PROPERTY)
+        cli.put_property(PROPERTY_NAME, PROPERTY)
 
 
 def test_ensure_time():

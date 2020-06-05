@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 from httpx import AsyncClient
 
-from .util import UncaughtServerError, ensure_time
+from .util import UncaughtServerError, ensue_name, ensure_time, simplify_attr
 
 
 class Client:
@@ -216,8 +216,18 @@ class Client:
     def put_properties(self, properties):
         return asyncio.run(self.aput_properties(properties))
 
-    async def aput_property(self, property):
-        self.check_owner(property)
+    async def aput_property(self, name, attributes):
+        """
+        name : string
+            name of property
+        attributes : dict
+            mappings of name to value
+        """
+        name = ensure_name(name)
+        attr_value = [{'name': ensue_name(name), 'value': value} for name, value in attributes.items()]
+        property = dict({'name': name,
+                         'owner': self.user,
+                         'attributes': attr_value})
         async with self._session as api:
             res = await api.put(f'properties/{property["name"]}',
                                 json=property)
@@ -227,14 +237,16 @@ class Client:
         # extra verification that everything worked correctly.
         property_from_server = res.json()
         property_cp = property.copy()
-        property_cp['attributes'] = sorted(property_cp['attributes'],
-                                           key=lambda d: d['name'])
-        if OrderedDict(property_cp) != property_from_server:
+        for e in property_from_server['attributes']:
+            e.pop('state')
+        property_from_server.pop('state')
+        property_cp['attributes'] = sorted(property_cp['attributes'], key=lambda d: d['name'])
+        if property_cp != property_from_server:
             raise UncaughtServerError(f"No http error was raised but server \
                                       doesn't successfully put property you \
                                       want. Server puts {res.json()} while \
-                                      you are tring to put {property}.")
-        return res.json()
+>                                     you are tring to put {property}.")
+        return simplify_attr(res.json())
 
-    def put_property(self, property):
-        return asyncio.run(self.aput_property(property))
+    def put_property(self, name, property):
+        return asyncio.run(self.aput_property(name, property))
