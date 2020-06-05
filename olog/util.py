@@ -30,5 +30,10 @@ def ensure_time(time):
     return time.isoformat(sep=' ', timespec='milliseconds')
 
 
+def reconstruct_by_name(d):
+    d.pop('name')
+    return {'name': d}
+
+
 class UncaughtServerError(Exception):
     pass
