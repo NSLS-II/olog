@@ -202,12 +202,22 @@ class Client:
         async with self._session as api:
             res = await api.get(f'properties/{name}')
         res.raise_for_status()
-        return res.json()
+        return simplify_attr(res.json())
 
     def get_property(self, name):
         return asyncio.run(self.aget_property(name))
 
     async def aput_properties(self, properties):
+        '''
+        properties: dict
+            A nested dict where each pair is a property <name>: <attributs>
+        '''
+        properties = list()
+        for name, attributes in properties.items():
+            attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
+            properties.append(dict({'name': name,
+                                    'owner': self.user,
+                                    'attributes': attr_value}))
         async with self._session as api:
             res = await api.put('properties', json=properties)
         res.raise_for_status()
@@ -244,7 +254,7 @@ class Client:
             raise UncaughtServerError(f"No http error was raised but server \
                                       doesn't successfully put property you \
                                       want. Server puts {res.json()} while \
->                                     you are tring to put {property}.")
+                                      you are tring to put {property}.")
         return simplify_attr(res.json())
 
     def put_property(self, name, property):
