@@ -42,5 +42,11 @@ def simplify_attr(d):
     return d_cp
 
 
+def simplify_logbook(logbook):
+    logbook_cp = logbook.copy()
+    name = logbook_cp.pop('name')
+    return dict({name: logbook_cp})
+
+
 class UncaughtServerError(Exception):
     pass

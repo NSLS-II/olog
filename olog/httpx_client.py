@@ -2,37 +2,51 @@ import asyncio
 
 from httpx import AsyncClient
 
-from .util import UncaughtServerError, ensure_name, ensure_time, simplify_attr
+from .util import UncaughtServerError, ensure_name, ensure_time, simplify_attr, simplify_logbook
 
 
 class Client:
     def __init__(self, url, user, password):
-        """
-        url : string
+        '''A Python client of olog service
+
+        Parameters
+        ----------
+        url : str
             base URL, such as ``'https://some_host:port/Olog'``
         user : string
-        password : string
-        """
+            Your olog service username
+        password : str
+            Your olog service password
+        '''
         if not url.endswith('/'):
             url += '/'
         self.user = user
         self._session = AsyncClient(base_url=url, auth=(self.user, password))
-
-    def check_owner(self, d):
-        # This function checks whether value of 'owner' match user of client.
-        # It has to be true based on server requirments.
-        if 'owner' in d and d['owner'] != self.user:
-            raise ValueError(f"Server only accept current user: {self.user} as \
-                             value of owner")
 
     # Logbooks
     async def aget_logbooks(self):
         async with self._session as api:
             res = await api.get('logbooks')
         res.raise_for_status()
-        return res.json()
+        logbooks = list()
+        for i in res.json():
+            logbooks.append(simplify_logbook(i))
+        return logbooks
 
     def get_logbooks(self):
+        '''
+        Returns
+        -------
+        logbooks : list
+            Each element is a logbook dict.
+
+        Examples
+        --------
+        >>>cli.get_logbooks()
+        [{'DAMA': {'owner': 'olog-logs', 'state': 'Active'}},
+         {'Operations': {'owner': 'olog-logs', 'state': 'Active'}}]
+
+        '''
         return asyncio.run(self.aget_logbooks())
 
     async def aget_logbook(self, name):
@@ -41,38 +55,84 @@ class Client:
         async with self._session as api:
             res = await api.get(f'logbooks/{name}')
         res.raise_for_status()
-        return res.json()
+        return simplify_logbook(res.json())
 
     def get_logbook(self, name):
+        '''
+        Parameters
+        ----------
+        name : str
+            name of logbook
+
+        Returns
+        -------
+        logbook : dict
+            Each element is a logbook dict.
+
+        Examples
+        --------
+        >>>cli.get_logbook("TEST')
+        {'TEST': {'owner': 'olog-logs', 'state': 'Active'}}
+
+        '''
         return asyncio.run(self.aget_logbook(name))
 
-    async def aput_logbooks(self, logbooks):
+    async def aput_logbooks(self, names):
+        logbooks = [{'name': name, 'owner': self.user} for name in names]
         async with self._session as api:
             res = await api.put('logbooks', json=logbooks)
         res.raise_for_status()
 
     def put_logbooks(self, logbooks):
+        '''
+        Parameters
+        ----------
+        logbooks : list
+            Each element is a str of logbook name.
+        
+        Examples
+        --------
+        >>>cli.put_logbooks(['TEST0', 'TEST1']) 
+
+        '''
         return asyncio.run(self.aput_logbooks(logbooks))
 
-    async def aput_logbook(self, logbook):
-        self.check_owner(logbook)
+    async def aput_logbook(self, name):
+        logbook = {'name': name, 'owner': self.user}
         async with self._session as api:
-            res = await api.put(f'logbooks/{logbook["name"]}',  json=logbook)
+            res = await api.put(f'logbooks/name',  json=logbook)
         res.raise_for_status()
         # The server returned OK. Its response contains a copy of what it
         # inserted into its database. We can compare it with our submission for
         # extra verification that everything worked correctly.
         logbook_from_server = res.json()
-        logbook_cp = logbook.copy()
-        if logbook_cp != logbook_from_server:
+        logbook_from_server.pop('state')
+        if logbook != logbook_from_server:
             raise UncaughtServerError(f"No http error was raised but server \
                                       doesn't successfully put logbook you \
                                       want. Server put {res.json()} while you \
                                       are tring to put {logbook}.")
-        return res.json()
+        return simplify_logbook(res.json())
 
-    def put_logbook(self, logbook):
-        return asyncio.run(self.aput_logbook(logbook))
+    def put_logbook(self, name):
+        '''
+        Parameters
+        ----------
+        logbook : str
+            logbook name.
+        
+        Returns
+        -------
+        logbook : dict
+            A dict map logbook name to a nested dict of owner and state informations.
+
+        Examples
+        --------
+        >>>cli.put_logbook('TEST') 
+        {'TEST': {'owner': 'admin', 'state': 'Active'}}
+
+        '''
+        return asyncio.run(self.aput_logbook(name))
 
     # Logs
     async def aget_logs(self, desc=None, fuzzy=None, phrase=None, owner=None,
@@ -220,15 +280,15 @@ class Client:
     def get_property(self, name):
         return asyncio.run(self.aget_property(name))
 
-    async def aput_properties(self, properties):
+    async def aput_properties(self, named_attributes):
         '''
-        properties: dict
-            Each element is a pair of {<name>: <attributs>, ...}
+        named_attributes: dict
+            Each element is a pair of {<name>: <attributes>, ...}
         returns: list
             Each element is a dict which is property with simplified attributes.
         '''
         properties = list()
-        for name, attributes in properties.items():
+        for name, attributes in named_attributes.items():
             attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
             properties.append(dict({'name': name,
                                     'owner': self.user,
