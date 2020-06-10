@@ -190,15 +190,28 @@ class Client:
 
     # Properties
     async def aget_properties(self):
+        '''
+        returns: list
+            Each element is a dict which is property with simplified attributes.
+        '''
         async with self._session as api:
             res = await api.get('properties')
         res.raise_for_status()
-        return res.json()
+        properties = list()
+        for i in res.json():
+            properties.append(simplify_attr(i))
+        return properties
 
     def get_properties(self):
         return asyncio.run(self.aget_properties())
 
     async def aget_property(self, name):
+        '''
+        name: str
+            Name of property.
+        returns: dict
+            A dict with simplified attributes.
+        '''
         async with self._session as api:
             res = await api.get(f'properties/{name}')
         res.raise_for_status()
@@ -210,7 +223,9 @@ class Client:
     async def aput_properties(self, properties):
         '''
         properties: dict
-            A nested dict where each pair is a property <name>: <attributs>
+            Each element is a pair of {<name>: <attributs>, ...}
+        returns: list
+            Each element is a dict which is property with simplified attributes.
         '''
         properties = list()
         for name, attributes in properties.items():
@@ -227,10 +242,10 @@ class Client:
 
     async def aput_property(self, name, attributes):
         """
-        name : string
-            name of property
+        name : str
+            Name of property
         attributes : dict
-            mappings of name to value
+            Mappings of name to value
         """
         name = ensure_name(name)
         attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
@@ -257,5 +272,5 @@ class Client:
                                       you are tring to put {property}.")
         return simplify_attr(res.json())
 
-    def put_property(self, name, property):
-        return asyncio.run(self.aput_property(name, property))
+    def put_property(self, name, attributes):
+        return asyncio.run(self.aput_property(name, attributes))
