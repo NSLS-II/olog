@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 from httpx import AsyncClient
 
-from .util import UncaughtServerError, ensue_name, ensure_time, simplify_attr
+from .util import UncaughtServerError, ensure_name, ensure_time, simplify_attr
 
 
 class Client:
@@ -224,7 +224,7 @@ class Client:
             mappings of name to value
         """
         name = ensure_name(name)
-        attr_value = [{'name': ensue_name(name), 'value': value} for name, value in attributes.items()]
+        attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
         property = dict({'name': name,
                          'owner': self.user,
                          'attributes': attr_value})
