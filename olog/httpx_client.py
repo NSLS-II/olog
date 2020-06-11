@@ -2,7 +2,8 @@ import asyncio
 
 from httpx import AsyncClient
 
-from .util import UncaughtServerError, ensure_name, ensure_time, simplify_attr, simplify_logbook
+from .util import (UncaughtServerError, ensure_name, ensure_time,
+                   simplify_attr, simplify_logbook)
 
 
 class Client:
@@ -430,8 +431,8 @@ class Client:
 
     async def aput_property(self, name, attributes):
         name = ensure_name(name)
-        monitor_list= [name for name, value in attributes.items()
-                            if isinstance(value, int) or isinstance(value, float)]
+        monitor_list = [name for name, value in attributes.items()
+                        if isinstance(value, int) or isinstance(value, float)]
         print('monitor_list')
         print(monitor_list)
         attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
@@ -450,14 +451,15 @@ class Client:
         for e in property_from_server['attributes']:
             e.pop('state')
         property_from_server.pop('state')
-        #property_cp['attributes'] = sorted(property_cp['attributes'], key=lambda d: d['name'])
-        #Looks server doesn't return sorted attributes
+        # property_cp['attributes'] = sorted(property_cp['attributes'], key=lambda d: d['name'])
+        # Looks server doesn't return sorted attributes
         for i in property_cp['attributes']:
             if i['name'] in monitor_list:
                 i['value'] = str(i['value'])
         if property_cp != property_from_server:
-            raise UncaughtServerError(f"No http error was raised but server doesn't successfully put property you \
-                                      want. Server puts {property_from_server} while you are tring to put {property_cp}.")
+            raise UncaughtServerError(f"No http error was raised but server doesn't successfully put property" \
+                                      "you want.Server puts {property_from_server} while you are tring to put" \
+                                      "{property_cp}.")
         return simplify_attr(res.json())
 
     def put_property(self, name, attributes):

@@ -6,7 +6,8 @@ import pytest
 import vcr as _vcr
 
 from olog.httpx_client import Client
-from olog.util import UncaughtServerError, ensure_name, ensure_time, simplify_attr
+from olog.util import (UncaughtServerError, ensure_name, ensure_time,
+                       simplify_attr)
 
 # This stashes Olog server responses in JSON files (one per test)
 # so that an actual server does not have to be running.
@@ -39,7 +40,7 @@ INVALID_LOGBOOK = {'name': 'Operations', 'owner': 'invalid_name',
 LOGBOOK_NAME = 'Operations'
 
 PROPERTY = {'name': 'TEST', 'owner': 'admin', 'state': 'Active', 'attributes': {'id': '1', 'url': None}}
-PROPERTIES = {'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}}
+PROPERTIES = {'TEST0': {'id': None, 'url': None}, 'TEST1': {'id': None, 'url': None}}
 PROPERTY_NAME = 'TEST'
 PROPERTY_ATTRIBUTES = {'url': None, 'id': 1}
 INVALID_PROPERTY = {'name': 'Ticket',
@@ -212,5 +213,5 @@ def test_ensure_time():
 def test_simplify_attr():
     before = {'attributes': [{'name': 'id', 'value': 1}]}
     after = simplify_attr(before)
-    real = {'attributes': {'id':1}}
+    real = {'attributes': {'id': 1}}
     assert real == after
