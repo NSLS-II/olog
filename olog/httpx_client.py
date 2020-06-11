@@ -101,7 +101,7 @@ class Client:
     async def aput_logbook(self, name):
         logbook = {'name': name, 'owner': self.user}
         async with self._session as api:
-            res = await api.put(f'logbooks/name',  json=logbook)
+            res = await api.put(f'logbooks/{name}',  json=logbook)
         res.raise_for_status()
         # The server returned OK. Its response contains a copy of what it
         # inserted into its database. We can compare it with our submission for
@@ -457,8 +457,8 @@ class Client:
             if i['name'] in monitor_list:
                 i['value'] = str(i['value'])
         if property_cp != property_from_server:
-            raise UncaughtServerError("No http error was raised but server doesn't successfully put property" \
-                                      f"you want.Server puts {property_from_server} while you are tring to put" \
+            raise UncaughtServerError("No http error was raised but server doesn't successfully put property"
+                                      f"you want.Server puts {property_from_server} while you are tring to put"
                                       f"{property_cp}.")
         return simplify_attr(res.json())
 
