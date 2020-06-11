@@ -24,7 +24,7 @@ vcr = _vcr.VCR(
 RECORDED_URL = "http://10.0.137.22:8080/Olog"
 # Only required if we are re-recording for VCR.
 url = os.environ.get('OLOG_URL', RECORDED_URL)
-user = os.environ.get('OLOG_USER', 'olog-logs')
+user = os.environ.get('OLOG_USER', 'admin')
 password = os.environ.get('OLOG_PASSWORD', '')
 cli = Client(url, user, password)
 
@@ -191,7 +191,7 @@ def test_put_properties():
 
 @vcr.use_cassette()
 def test_put_property():
-    cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
+    PROPERTY = cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
 
 
 @vcr.use_cassette()
