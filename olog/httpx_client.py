@@ -89,10 +89,10 @@ class Client:
         ----------
         logbooks : list
             Each element is a str of logbook name.
-        
+
         Examples
         --------
-        >>>cli.put_logbooks(['TEST0', 'TEST1']) 
+        >>>cli.put_logbooks(['TEST0', 'TEST1'])
 
         '''
         return asyncio.run(self.aput_logbooks(logbooks))
@@ -120,7 +120,7 @@ class Client:
         ----------
         logbook : str
             logbook name.
-        
+
         Returns
         -------
         logbook : dict
@@ -128,7 +128,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_logbook('TEST') 
+        >>>cli.put_logbook('TEST')
         {'TEST': {'owner': 'admin', 'state': 'Active'}}
 
         '''
@@ -154,7 +154,9 @@ class Client:
     def get_logs(self, *, desc=None, fuzzy=None, phrase=None, owner=None,
                  start=None, end=None, includeevents=None,
                  logbooks=None, tags=None, properties=None):
-        """
+        '''
+        Parameters
+        ----------
         desc : a list of str
             A list of keywords which are present in the log entry description
 
@@ -181,7 +183,15 @@ class Client:
 
         logbooks : str
             Search for log entries with at least one of the given logbooks
-        """
+
+        Returns
+        -------
+        logs : list of logs
+
+        Examples
+        --------
+        >>>cli.get_logs(logbooks='Operations')
+        '''
         return asyncio.run(self.aget_logs(desc, fuzzy, phrase, owner,
                                           start, end, includeevents,
                                           logbooks, tags))
@@ -193,6 +203,20 @@ class Client:
         return res.json()
 
     def get_log(self, id):
+        '''
+        Parameters
+        ----------
+        id : int
+            id number of log
+
+        Returns
+        -------
+        log : dict
+
+        Examples
+        --------
+        >>>cli.get_log(1)
+        '''
         return asyncio.run(self.aget_log(id))
 
     # Attachments
@@ -202,6 +226,23 @@ class Client:
         return res.content
 
     def get_attachment(self, id, filename):
+        '''Get attachemnt file based on log id and filename
+
+        Parameters
+        ----------
+        id : int
+            id number of log
+        filename : str
+            name of file
+
+        Returns
+        -------
+        content : content of httpx return
+
+        Examples
+        --------
+        >>>cli.get_attachment(1, 'test')
+        '''
         return asyncio.run(self.aget_attachment(id, filename))
 
     async def apost_attachment(self, id, files):
@@ -210,6 +251,20 @@ class Client:
         res.raise_for_status()
 
     def post_attachment(self, id, files):
+        '''
+        Parameters
+        ----------
+        id : int
+            id number of log
+        files : dict
+            files dictionary including filename, file obj and meta data.
+
+        Examples
+        --------
+        >>> files = {'file': open('<FILE>','rb'), 'filename': (None, '<FILENAME>'),
+        'fileMetadataDescription': (None, 'This is a attachment file')}
+        >>>cli.post_attachment(3, files)
+        '''
         return asyncio.run(self.apost_attachment(id, files))
 
     # Tags
@@ -220,6 +275,16 @@ class Client:
         return res.json()
 
     def get_tags(self):
+        '''
+        Returns
+        -------
+        tags : list
+            A list of tag dict
+
+        Examples
+        --------
+        >>>cli.get_tags()
+        '''
         return asyncio.run(self.aget_tags())
 
     async def aget_tag(self, name):
@@ -229,6 +294,21 @@ class Client:
         return res.json()
 
     def get_tag(self, name):
+        '''
+        Parameters
+        ----------
+        name : str
+            Name of tag.
+
+        Returns
+        -------
+        tag : dict
+            A tag dict.
+
+        Examples
+        --------
+        >>>cli.get_tag('TEST')
+        '''
         return asyncio.run(self.aget_tag(name))
 
     async def aput_tags(self, names):
@@ -237,6 +317,17 @@ class Client:
         res.raise_for_status()
 
     def put_tags(self, names):
+        '''
+        Parameters
+        ----------
+
+        names : list
+            List of names
+
+        Examples
+        --------
+        >>>cli.put_tags(['TEST0', 'TEST1'])
+        '''
         return asyncio.run(self.aput_tags(names))
 
     async def aput_tag(self, name):
@@ -246,14 +337,26 @@ class Client:
         return res.json()
 
     def put_tag(self, name):
+        '''
+        Parameters
+        ----------
+        name : str
+            Name of tag
+
+        Returns
+        -------
+        tag : dict
+            The tag dict with automatically added state
+
+        Examples
+        --------
+        >>>cli.put_tag('TEST')
+        {'name': 'TEST1', 'state': 'Active'}
+        '''
         return asyncio.run(self.aput_tag(name))
 
     # Properties
     async def aget_properties(self):
-        '''
-        returns: list
-            Each element is a dict which is property with simplified attributes.
-        '''
         async with self._session as api:
             res = await api.get('properties')
         res.raise_for_status()
@@ -263,30 +366,43 @@ class Client:
         return properties
 
     def get_properties(self):
+        '''
+        Returns
+        -------
+        properties : list
+            A list of property dict
+
+        Examples
+        --------
+        >>>cli.get_properties()
+        '''
         return asyncio.run(self.aget_properties())
 
     async def aget_property(self, name):
-        '''
-        name: str
-            Name of property.
-        returns: dict
-            A dict with simplified attributes.
-        '''
         async with self._session as api:
             res = await api.get(f'properties/{name}')
         res.raise_for_status()
         return simplify_attr(res.json())
 
     def get_property(self, name):
+        '''
+        Parameters
+        ----------
+        name : str
+            Name of property.
+
+        Returns
+        -------
+        property : dict
+            A property dict.
+
+        Examples
+        --------
+        >>>cli.get_property('TEST')
+        '''
         return asyncio.run(self.aget_property(name))
 
     async def aput_properties(self, named_attributes):
-        '''
-        named_attributes: dict
-            Each element is a pair of {<name>: <attributes>, ...}
-        returns: list
-            Each element is a dict which is property with simplified attributes.
-        '''
         properties = list()
         for name, attributes in named_attributes.items():
             attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
@@ -297,16 +413,22 @@ class Client:
             res = await api.put('properties', json=properties)
         res.raise_for_status()
 
-    def put_properties(self, properties):
-        return asyncio.run(self.aput_properties(properties))
+    def put_properties(self, named_attributes):
+        '''
+        Parameters
+        ----------
+
+        named_attributes : dict
+            Each element is a pair of {<name>: <attributes>, ...}. <attributes> is dict
+            of <key: value> pair.
+
+        Examples
+        --------
+        >>>cli.put_properties({'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}})
+        '''
+        return asyncio.run(self.aput_properties(named_attributes))
 
     async def aput_property(self, name, attributes):
-        """
-        name : str
-            Name of property
-        attributes : dict
-            Mappings of name to value
-        """
         name = ensure_name(name)
         attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
         property = dict({'name': name,
@@ -333,4 +455,21 @@ class Client:
         return simplify_attr(res.json())
 
     def put_property(self, name, attributes):
+        '''
+        Parameters
+        ----------
+        name : str
+            Name of property
+        attributes : dict
+            Mappings of name to value.
+
+        Returns
+        -------
+        property : dict
+            The property dict with automatically added state and owner.
+
+        Examples
+        --------
+        >>>cli.put_property('TEST', {'id': 1, 'url': None})
+        '''
         return asyncio.run(self.aput_property(name, attributes))
