@@ -35,10 +35,10 @@
                         "application/json;charset=UTF-8"
                     ],
                     "date": [
-                        "Thu, 11 Jun 2020 19:42:55 GMT"
+                        "Thu, 11 Jun 2020 20:21:34 GMT"
                     ]
                 },
-                "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
+                "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"url\",\"value\":null,\"state\":\"Active\"},{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"}]}"
             }
         }
     ]

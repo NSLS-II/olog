@@ -37,29 +37,29 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
+                    "date": [
+                        "Thu, 11 Jun 2020 20:21:34 GMT"
+                    ],
+                    "pragma": [
+                        "no-cache"
+                    ],
                     "x-frame-options": [
                         "DENY"
-                    ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
-                    ],
-                    "expires": [
-                        "0"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
                     ],
                     "cache-control": [
                         "no-cache, no-store, max-age=0, must-revalidate"
                     ],
-                    "date": [
-                        "Thu, 11 Jun 2020 19:42:54 GMT"
+                    "content-type": [
+                        "application/json;charset=UTF-8"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
+                    ],
+                    "expires": [
+                        "0"
                     ],
                     "x-content-type-options": [
                         "nosniff"
-                    ],
-                    "pragma": [
-                        "no-cache"
                     ]
                 },
                 "content": "{\"name\":\"THIS IS A WRONG NAME\",\"owner\":\"admin\",\"state\":\"Active\"}"
