@@ -200,6 +200,11 @@ def test_put_property_with_error():
 
 
 def test_ensure_time():
+    with pytest.raises(TypeError):
+        ensure_name(1)
+
+
+def test_ensure_time():
     for time in TIME_INPUTS[:-2]:
         assert '2015-01-01 00:00:00.000' == ensure_time(time)
     for time in TIME_INPUTS[-2:]:
