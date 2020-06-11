@@ -32,13 +32,13 @@
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
                     "date": [
-                        "Thu, 21 May 2020 20:56:01 GMT"
+                        "Thu, 11 Jun 2020 18:32:09 GMT"
                     ],
                     "content-type": [
                         "application/json;charset=UTF-8"
                     ]
                 },
-                "content": "[{\"name\":\"TEST6\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST2\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST1\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}]"
+                "content": "[{\"name\":\"TEST6\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST2\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST0\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST\",\"owner\":\"olog-logs\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST7\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST8\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST1\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}]"
             }
         }
     ]

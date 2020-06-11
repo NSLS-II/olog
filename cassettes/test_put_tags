@@ -5,7 +5,7 @@
             "request": {
                 "method": "PUT",
                 "uri": "http://10.0.137.22:8080/Olog/tags",
-                "body": "[{\"name\": \"Fault\", \"state\": \"Active\"}, {\"name\": \"TEST\", \"state\": \"Active\"}]",
+                "body": "[{\"name\": \"Fault\"}, {\"name\": \"TEST\"}]",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,7 +23,7 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "75"
+                        "37"
                     ],
                     "content-type": [
                         "application/json"
@@ -37,14 +37,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
+                    "x-frame-options": [
+                        "DENY"
                     ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
-                    ],
-                    "expires": [
-                        "0"
+                    "x-content-type-options": [
+                        "nosniff"
                     ],
                     "pragma": [
                         "no-cache"
@@ -52,14 +49,17 @@
                     "content-type": [
                         "application/json;charset=UTF-8"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
                     ],
-                    "x-frame-options": [
-                        "DENY"
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ],
                     "date": [
-                        "Thu, 21 May 2020 20:56:01 GMT"
+                        "Thu, 11 Jun 2020 18:32:09 GMT"
+                    ],
+                    "expires": [
+                        "0"
                     ]
                 },
                 "content": "[{\"name\":\"Fault\",\"state\":\"Active\"},{\"name\":\"TEST\",\"state\":\"Active\"}]"

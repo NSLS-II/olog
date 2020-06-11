@@ -5,7 +5,7 @@
             "request": {
                 "method": "POST",
                 "uri": "http://10.0.137.22:8080/Olog/logs/attachments/1",
-                "body": "--f31bbbb818436d51f777f89c2b0b612c\r\nContent-Disposition: form-data; name=\"file\"; filename=\"example_attachment.txt\"\r\nContent-Type: text/plain\r\n\r\nThis is an example of attachment file.\nThis is second line.\n\r\n--f31bbbb818436d51f777f89c2b0b612c\r\nContent-Disposition: form-data; name=\"filename\"\r\n\r\ntest\r\n--f31bbbb818436d51f777f89c2b0b612c\r\nContent-Disposition: form-data; name=\"fileMetadataDescription\"\r\n\r\nThis is a attachment\r\n--f31bbbb818436d51f777f89c2b0b612c--\r\n",
+                "body": "--40944c4e8bbe62ad520596dcc5ed4b28\r\nContent-Disposition: form-data; name=\"file\"; filename=\"README.md\"\r\nContent-Type: application/octet-stream\r\n\r\n# olog\n\nThis is Python client of the new rewritten\n[Olog](https://olog-es.readthedocs.io/en/latest/). It has one class,\n``Client``, with methods corresponding to each command in Olog's REST API.\n\nIt includes automated tests that can be run without an Olog server, relying on\npreviously recorded requests and responses in the source tree. (See later\nsection for details.)\n\n## Installation\n\n```\ngit clone https://github.com/NSLS-II/olog\ncd olog\npip install -r requirements.txt\npip install .\n```\n\nOr, for a development installation:\n\n```\npip install -r requirements.txt\npip install -r requirements-dev.txt\npip install -e .\n```\n\n## Usage\n\nInstantiate a Client. We recommend passing authentication info through\nenvironment variables.\n\n```python\nfrom olog import Client\nimport os\n\ncli = Client(os.eniron['OLOG_URL'],\n             os.environ['OLOG_USER'],\n             os.environ['OLOG_PASSWORD'])\n```\n\nUse the methods on the Client. For example:\n\n```\ncli.get_logbooks()\n```\n\n## Running Tests\n\n### Simple case: without an Olog server\n\nThe tests can be run *without an Olog server*. The source tree contains\nserialized requests and responses that were captured during test execution\nagainst a real Olog server. (Authentication information has been filtered out.)\nIf the requests issued during any test differ from those that were issued during\nthe capture, the tests will fail. See\n[VCR documentation](https://vcrpy.readthedocs.io) for details on this technique.\n\nRun tests:\n\n```\npytest test_olog.py\n```\n\n### General case: with an Olog server\n\n\"TO DO: Document how to stand up a new Olog server for testing.\"\n\n## References\n\n[Official Olog web service API documentation](https://olog-es.readthedocs.io/en/latest/).\n\n[Archived Olog web service API documentation](https://github.com/Olog/olog-service/raw/master/doc/Release%20Notes%20and%20Manuals.docx)(a .docx file).\n\r\n--40944c4e8bbe62ad520596dcc5ed4b28\r\nContent-Disposition: form-data; name=\"filename\"\r\n\r\ntest\r\n--40944c4e8bbe62ad520596dcc5ed4b28\r\nContent-Disposition: form-data; name=\"fileMetadataDescription\"\r\n\r\nThis is a attachment\r\n--40944c4e8bbe62ad520596dcc5ed4b28--\r\n",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,10 +23,10 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "461"
+                        "2261"
                     ],
                     "content-type": [
-                        "multipart/form-data; boundary=f31bbbb818436d51f777f89c2b0b612c"
+                        "multipart/form-data; boundary=40944c4e8bbe62ad520596dcc5ed4b28"
                     ]
                 }
             },
@@ -37,26 +37,26 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "pragma": [
-                        "no-cache"
-                    ],
                     "expires": [
                         "0"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
-                    ],
-                    "x-frame-options": [
-                        "DENY"
-                    ],
-                    "date": [
-                        "Mon, 01 Jun 2020 19:42:09 GMT"
                     ],
                     "x-content-type-options": [
                         "nosniff"
                     ],
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
                     "x-xss-protection": [
                         "1; mode=block"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
+                    ],
+                    "date": [
+                        "Thu, 11 Jun 2020 18:32:09 GMT"
                     ],
                     "content-length": [
                         "0"
