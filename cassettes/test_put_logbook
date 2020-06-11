@@ -4,7 +4,7 @@
         {
             "request": {
                 "method": "PUT",
-                "uri": "http://10.0.137.22:8080/Olog/logbooks/name",
+                "uri": "http://10.0.137.22:8080/Olog/logbooks/TEST",
                 "body": "{\"name\": \"TEST\", \"owner\": \"admin\"}",
                 "headers": {
                     "host": [
@@ -37,20 +37,14 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
                     "cache-control": [
                         "no-cache, no-store, max-age=0, must-revalidate"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "expires": [
+                        "0"
                     ],
                     "x-frame-options": [
                         "DENY"
-                    ],
-                    "date": [
-                        "Thu, 11 Jun 2020 20:21:34 GMT"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -58,8 +52,14 @@
                     "pragma": [
                         "no-cache"
                     ],
-                    "expires": [
-                        "0"
+                    "date": [
+                        "Thu, 11 Jun 2020 21:38:47 GMT"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
+                    ],
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ]
                 },
                 "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\"}"

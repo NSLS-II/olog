@@ -37,29 +37,29 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
-                    ],
-                    "x-frame-options": [
-                        "DENY"
-                    ],
-                    "expires": [
-                        "0"
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
                     ],
                     "pragma": [
                         "no-cache"
                     ],
+                    "expires": [
+                        "0"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
                     "date": [
-                        "Thu, 11 Jun 2020 20:21:34 GMT"
-                    ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
+                        "Thu, 11 Jun 2020 21:38:48 GMT"
                     ],
                     "x-xss-protection": [
                         "1; mode=block"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ]
                 },
                 "content": "[{\"name\":\"TEST0\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]},{\"name\":\"TEST1\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}]"

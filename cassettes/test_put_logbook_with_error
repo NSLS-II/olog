@@ -4,7 +4,7 @@
         {
             "request": {
                 "method": "PUT",
-                "uri": "http://10.0.137.22:8080/Olog/logbooks/name",
+                "uri": "http://10.0.137.22:8080/Olog/logbooks/TEST",
                 "body": "{\"name\": \"TEST\", \"owner\": \"admin\"}",
                 "headers": {
                     "host": [
@@ -37,20 +37,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "date": [
-                        "Thu, 11 Jun 2020 20:21:34 GMT"
-                    ],
                     "pragma": [
                         "no-cache"
                     ],
-                    "x-frame-options": [
-                        "DENY"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
-                    ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "date": [
+                        "Thu, 11 Jun 2020 21:38:47 GMT"
                     ],
                     "x-xss-protection": [
                         "1; mode=block"
@@ -60,6 +51,15 @@
                     ],
                     "x-content-type-options": [
                         "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ]
                 },
                 "content": "{\"name\":\"THIS IS A WRONG NAME\",\"owner\":\"admin\",\"state\":\"Active\"}"

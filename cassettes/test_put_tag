@@ -37,14 +37,20 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "pragma": [
-                        "no-cache"
-                    ],
-                    "date": [
-                        "Thu, 11 Jun 2020 20:21:34 GMT"
+                    "x-content-type-options": [
+                        "nosniff"
                     ],
                     "x-xss-protection": [
                         "1; mode=block"
+                    ],
+                    "expires": [
+                        "0"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
+                    ],
+                    "pragma": [
+                        "no-cache"
                     ],
                     "x-frame-options": [
                         "DENY"
@@ -52,14 +58,8 @@
                     "cache-control": [
                         "no-cache, no-store, max-age=0, must-revalidate"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
-                    ],
-                    "expires": [
-                        "0"
-                    ],
-                    "x-content-type-options": [
-                        "nosniff"
+                    "date": [
+                        "Thu, 11 Jun 2020 21:38:47 GMT"
                     ]
                 },
                 "content": "{\"name\":\"Fault\",\"state\":\"Active\"}"

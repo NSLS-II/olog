@@ -37,8 +37,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "pragma": [
+                        "no-cache"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
                     ],
                     "cache-control": [
                         "no-cache, no-store, max-age=0, must-revalidate"
@@ -46,20 +49,17 @@
                     "expires": [
                         "0"
                     ],
-                    "pragma": [
-                        "no-cache"
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ],
                     "date": [
-                        "Thu, 11 Jun 2020 20:21:35 GMT"
+                        "Thu, 11 Jun 2020 21:38:48 GMT"
                     ],
-                    "x-content-type-options": [
-                        "nosniff"
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ],
                     "x-frame-options": [
                         "DENY"
-                    ],
-                    "x-xss-protection": [
-                        "1; mode=block"
                     ]
                 },
                 "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"url\",\"value\":null,\"state\":\"Active\"},{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"}]}"
