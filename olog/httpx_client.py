@@ -457,9 +457,9 @@ class Client:
             if i['name'] in monitor_list:
                 i['value'] = str(i['value'])
         if property_cp != property_from_server:
-            raise UncaughtServerError(f"No http error was raised but server doesn't successfully put property" \
-                                      "you want.Server puts {property_from_server} while you are tring to put" \
-                                      "{property_cp}.")
+            raise UncaughtServerError("No http error was raised but server doesn't successfully put property" \
+                                      f"you want.Server puts {property_from_server} while you are tring to put" \
+                                      f"{property_cp}.")
         return simplify_attr(res.json())
 
     def put_property(self, name, attributes):
