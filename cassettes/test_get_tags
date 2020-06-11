@@ -31,11 +31,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "date": [
-                        "Thu, 11 Jun 2020 18:32:09 GMT"
-                    ],
                     "content-type": [
                         "application/json;charset=UTF-8"
+                    ],
+                    "date": [
+                        "Thu, 11 Jun 2020 19:42:54 GMT"
                     ]
                 },
                 "content": "[{\"name\":\"Fault\",\"state\":\"Active\"},{\"name\":\"TEST6\",\"state\":\"Active\"},{\"name\":\"TEST9\",\"state\":\"Active\"},{\"name\":\"TEST4\",\"state\":\"Active\"},{\"name\":\"TEST5\",\"state\":\"Active\"},{\"name\":\"TEST2\",\"state\":\"Active\"},{\"name\":\"TEST7\",\"state\":\"Active\"},{\"name\":\"TEST8\",\"state\":\"Active\"},{\"name\":\"TEST1\",\"state\":\"Active\"},{\"name\":\"TEST\",\"state\":\"Active\"}]"

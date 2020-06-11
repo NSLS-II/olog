@@ -31,11 +31,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
+                    "date": [
+                        "Thu, 11 Jun 2020 19:42:54 GMT"
+                    ],
                     "content-type": [
                         "application/json;charset=UTF-8"
-                    ],
-                    "date": [
-                        "Thu, 11 Jun 2020 18:32:09 GMT"
                     ]
                 },
                 "content": "{\"name\":\"Fault\",\"state\":\"Active\"}"

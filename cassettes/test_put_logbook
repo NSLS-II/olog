@@ -40,26 +40,26 @@
                     "expires": [
                         "0"
                     ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
+                    "date": [
+                        "Thu, 11 Jun 2020 19:42:54 GMT"
                     ],
                     "pragma": [
                         "no-cache"
                     ],
-                    "x-frame-options": [
-                        "DENY"
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ],
                     "x-content-type-options": [
                         "nosniff"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
                     ],
                     "content-type": [
                         "application/json;charset=UTF-8"
-                    ],
-                    "date": [
-                        "Thu, 11 Jun 2020 18:32:09 GMT"
                     ]
                 },
                 "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\"}"

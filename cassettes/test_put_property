@@ -4,8 +4,8 @@
         {
             "request": {
                 "method": "PUT",
-                "uri": "http://10.0.137.22:8080/Olog/properties/Ticket",
-                "body": "{\"name\": \"Ticket\", \"owner\": \"admin\", \"attributes\": [{\"name\": \"url\", \"value\": null}, {\"name\": \"id\", \"value\": null}]}",
+                "uri": "http://10.0.137.22:8080/Olog/properties/TEST",
+                "body": "{\"name\": \"TEST\", \"owner\": \"admin\", \"attributes\": [{\"name\": \"url\", \"value\": null}, {\"name\": \"id\", \"value\": 1}]}",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,7 +23,7 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "115"
+                        "110"
                     ],
                     "content-type": [
                         "application/json"
@@ -37,17 +37,11 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
-                    ],
                     "pragma": [
                         "no-cache"
                     ],
-                    "expires": [
-                        "0"
-                    ],
-                    "cache-control": [
-                        "no-cache, no-store, max-age=0, must-revalidate"
+                    "date": [
+                        "Thu, 11 Jun 2020 19:42:55 GMT"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -55,14 +49,20 @@
                     "x-xss-protection": [
                         "1; mode=block"
                     ],
-                    "date": [
-                        "Thu, 11 Jun 2020 18:32:10 GMT"
-                    ],
                     "x-frame-options": [
                         "DENY"
+                    ],
+                    "expires": [
+                        "0"
+                    ],
+                    "cache-control": [
+                        "no-cache, no-store, max-age=0, must-revalidate"
+                    ],
+                    "content-type": [
+                        "application/json;charset=UTF-8"
                     ]
                 },
-                "content": "{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
+                "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"url\",\"value\":null,\"state\":\"Active\"},{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"}]}"
             }
         }
     ]

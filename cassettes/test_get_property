@@ -4,7 +4,7 @@
         {
             "request": {
                 "method": "GET",
-                "uri": "http://10.0.137.22:8080/Olog/properties/Ticket",
+                "uri": "http://10.0.137.22:8080/Olog/properties/TEST",
                 "body": "",
                 "headers": {
                     "host": [
@@ -35,10 +35,10 @@
                         "application/json;charset=UTF-8"
                     ],
                     "date": [
-                        "Thu, 11 Jun 2020 18:32:09 GMT"
+                        "Thu, 11 Jun 2020 19:42:55 GMT"
                     ]
                 },
-                "content": "{\"name\":\"Ticket\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
+                "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
             }
         }
     ]
