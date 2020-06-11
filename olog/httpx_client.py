@@ -119,7 +119,7 @@ class Client:
         '''
         Parameters
         ----------
-        logbook : str
+        name : str
             logbook name.
 
         Returns
@@ -433,8 +433,6 @@ class Client:
         name = ensure_name(name)
         monitor_list = [name for name, value in attributes.items()
                         if isinstance(value, int) or isinstance(value, float)]
-        print('monitor_list')
-        print(monitor_list)
         attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
         property = dict({'name': name,
                          'owner': self.user,
