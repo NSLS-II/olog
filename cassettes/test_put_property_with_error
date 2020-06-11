@@ -62,7 +62,7 @@
                         "nosniff"
                     ]
                 },
-                "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"url\",\"value\":null,\"state\":\"Active\"},{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"}]}"
+                "content": "{\"name\":\"THIS IS A WRONG NAME\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"url\",\"value\":null,\"state\":\"Active\"},{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"}]}"
             }
         }
     ]

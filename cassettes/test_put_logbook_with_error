@@ -62,7 +62,7 @@
                         "no-cache"
                     ]
                 },
-                "content": "{\"name\":\"TEST\",\"owner\":\"admin\",\"state\":\"Active\"}"
+                "content": "{\"name\":\"THIS IS A WRONG NAME\",\"owner\":\"admin\",\"state\":\"Active\"}"
             }
         }
     ]
