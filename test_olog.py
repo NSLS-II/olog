@@ -32,9 +32,8 @@ cli = Client(url, user, password)
 # Various test parameters
 LOG_ID = 1
 
-LOGBOOKS = [{'name': 'Operations', 'owner': 'olog-logs', 'state': 'Active'},
-            {'name': 'TEST', 'owner': 'olog-logs', 'state': 'Active'}]
-LOGBOOK = {'name': 'Operations', 'owner': 'olog-logs', 'state': 'Active'}
+LOGBOOKS = ['TEST0', 'TEST1']
+LOGBOOK = 'TEST'
 INVALID_LOGBOOK = {'name': 'Operations', 'owner': 'invalid_name',
                    'state': 'Active'}
 LOGBOOK_NAME = 'Operations'
@@ -54,6 +53,8 @@ PROPERTY = {'name': 'Ticket',
             'state': 'Active',
             'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
                            {'name': 'id', 'value': None, 'state': 'Active'}]}
+PROPERTIES = {'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}}
+PROPERTY_NAME = 'Ticket'
 PROPERTY_ATTRIBUTES = {'url': None, 'id': None}
 INVALID_PROPERTY = {'name': 'Ticket',
                     'owner': 'invalid_name',
@@ -62,7 +63,6 @@ INVALID_PROPERTY = {'name': 'Ticket',
                                     'state': 'Active'},
                                    {'name': 'id', 'value': None,
                                     'state': 'Active'}]}
-PROPERTY_NAME = 'Ticket'
 
 TAG_NAMES = ['Fault', 'TEST']
 TAG = {'name': 'Fault', 'state': 'Active'}
@@ -110,8 +110,6 @@ def test_put_logbooks():
 @vcr.use_cassette()
 def test_put_logbook():
     cli.put_logbook(LOGBOOK)
-    with pytest.raises(ValueError):
-        cli.put_logbook(INVALID_LOGBOOK)
 
 
 @vcr.use_cassette()
@@ -188,7 +186,7 @@ def test_get_property():
 
 @vcr.use_cassette()
 def test_put_properties():
-    cli.put_properties(PROPS)
+    cli.put_properties(PROPERTIES)
 
 
 @vcr.use_cassette()
@@ -202,7 +200,7 @@ def test_put_property_with_error():
     # response has been manually edited to be inconsistent
     # with the request to exercise this code path
     with pytest.raises(UncaughtServerError):
-        cli.put_property(PROPERTY_NAME, PROPERTY)
+        cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
 
 
 def test_ensure_time():
