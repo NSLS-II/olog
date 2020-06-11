@@ -6,7 +6,7 @@ import pytest
 import vcr as _vcr
 
 from olog.httpx_client import Client
-from olog.util import UncaughtServerError, ensure_time, simplify_attr
+from olog.util import UncaughtServerError, ensure_name, ensure_time, simplify_attr
 
 # This stashes Olog server responses in JSON files (one per test)
 # so that an actual server does not have to be running.
@@ -24,7 +24,7 @@ vcr = _vcr.VCR(
 RECORDED_URL = "http://10.0.137.22:8080/Olog"
 # Only required if we are re-recording for VCR.
 url = os.environ.get('OLOG_URL', RECORDED_URL)
-user = os.environ.get('OLOG_USER', 'olog-logs')
+user = os.environ.get('OLOG_USER', 'admin')
 password = os.environ.get('OLOG_PASSWORD', '')
 cli = Client(url, user, password)
 
@@ -38,16 +38,6 @@ INVALID_LOGBOOK = {'name': 'Operations', 'owner': 'invalid_name',
                    'state': 'Active'}
 LOGBOOK_NAME = 'Operations'
 
-PROPS = [{'name': 'Ticket',
-          'owner': 'olog-logs',
-          'state': 'Active',
-          'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
-                         {'name': 'id', 'value': None, 'state': 'Active'}]},
-         {'name': 'TEST',
-          'owner': 'olog-logs',
-          'state': 'Active',
-          'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
-                         {'name': 'id', 'value': None, 'state': 'Active'}]}]
 PROPERTY = {'name': 'TEST', 'owner': 'admin', 'state': 'Active', 'attributes': {'id': '1', 'url': None}}
 PROPERTIES = {'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}}
 PROPERTY_NAME = 'TEST'
