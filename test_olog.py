@@ -199,7 +199,7 @@ def test_put_property_with_error():
         cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
 
 
-def test_ensure_time():
+def test_ensure_name():
     with pytest.raises(TypeError):
         ensure_name(1)
 
