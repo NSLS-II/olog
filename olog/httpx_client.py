@@ -432,7 +432,7 @@ class Client:
     async def aput_property(self, name, attributes):
         name = ensure_name(name)
         monitor_list = [name for name, value in attributes.items()
-                        if isinstance(value, int) or isinstance(value, float)]
+                        if isinstance(value, (int, float))]
         print('monitor_list')
         print(monitor_list)
         attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
