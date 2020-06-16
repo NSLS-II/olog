@@ -421,7 +421,7 @@ class Client:
 
         named_attributes : dict
             Each element is a pair of {<name>: <attributes>, ...}. <attributes> is dict
-            of <key: value> pair.
+            of <key: value> pair. The type of value could be one of int, float and string.
 
         Examples
         --------
@@ -431,6 +431,8 @@ class Client:
 
     async def aput_property(self, name, attributes):
         name = ensure_name(name)
+        # Monitor those keys whose value isn't str.
+        # Convert them to str later since server always covert them and return str.
         monitor_list = [name for name, value in attributes.items()
                         if isinstance(value, (int, float))]
         attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
@@ -467,7 +469,7 @@ class Client:
         name : str
             Name of property
         attributes : dict
-            Mappings of name to value.
+            Mappings of name to value. The type of value could be one of int, float and string.
 
         Returns
         -------
