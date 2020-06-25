@@ -72,7 +72,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_logbook("TEST')
+        >>> cli.get_logbook("TEST')
         {'TEST': {'owner': 'olog-logs', 'state': 'Active'}}
 
         '''
@@ -93,7 +93,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_logbooks(['TEST0', 'TEST1'])
+        >>> cli.put_logbooks(['TEST0', 'TEST1'])
 
         '''
         return asyncio.run(self.aput_logbooks(logbooks))
@@ -129,7 +129,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_logbook('TEST')
+        >>> cli.put_logbook('TEST')
         {'TEST': {'owner': 'admin', 'state': 'Active'}}
 
         '''
@@ -191,7 +191,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_logs(logbooks='Operations')
+        >>> cli.get_logs(logbooks='Operations')
         '''
         return asyncio.run(self.aget_logs(desc, fuzzy, phrase, owner,
                                           start, end, includeevents,
@@ -216,7 +216,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_log(1)
+        >>> cli.get_log(1)
         '''
         return asyncio.run(self.aget_log(id))
 
@@ -242,7 +242,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_attachment(1, 'test')
+        >>> cli.get_attachment(1, 'test')
         '''
         return asyncio.run(self.aget_attachment(id, filename))
 
@@ -264,7 +264,7 @@ class Client:
         --------
         >>> files = {'file': open('<FILE>','rb'), 'filename': (None, '<FILENAME>'),
         'fileMetadataDescription': (None, 'This is a attachment file')}
-        >>>cli.post_attachment(3, files)
+        >>> cli.post_attachment(3, files)
         '''
         return asyncio.run(self.apost_attachment(id, files))
 
@@ -284,7 +284,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_tags()
+        >>> cli.get_tags()
         '''
         return asyncio.run(self.aget_tags())
 
@@ -308,7 +308,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_tag('TEST')
+        >>> cli.get_tag('TEST')
         '''
         return asyncio.run(self.aget_tag(name))
 
@@ -327,7 +327,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_tags(['TEST0', 'TEST1'])
+        >>> cli.put_tags(['TEST0', 'TEST1'])
         '''
         return asyncio.run(self.aput_tags(names))
 
@@ -351,7 +351,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_tag('TEST')
+        >>> cli.put_tag('TEST')
         {'name': 'TEST1', 'state': 'Active'}
         '''
         return asyncio.run(self.aput_tag(name))
@@ -375,7 +375,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_properties()
+        >>> cli.get_properties()
         '''
         return asyncio.run(self.aget_properties())
 
@@ -399,7 +399,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_property('TEST')
+        >>> cli.get_property('TEST')
         '''
         return asyncio.run(self.aget_property(name))
 
@@ -425,7 +425,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_properties({'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}})
+        >>> cli.put_properties({'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}})
         '''
         return asyncio.run(self.aput_properties(named_attributes))
 
@@ -478,6 +478,6 @@ class Client:
 
         Examples
         --------
-        >>>cli.put_property('TEST', {'id': 1, 'url': None})
+        >>> cli.put_property('TEST', {'id': 1, 'url': None})
         '''
         return asyncio.run(self.aput_property(name, attributes))
