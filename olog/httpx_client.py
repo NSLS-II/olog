@@ -30,8 +30,8 @@ class Client:
             res = await api.get('logbooks')
         res.raise_for_status()
         logbooks = list()
-        for i in res.json():
-            logbooks.append(simplify_logbook(i))
+        for logbook in res.json():
+            logbooks.append(simplify_logbook(logbook))
         return logbooks
 
     def get_logbooks(self):
@@ -362,8 +362,8 @@ class Client:
             res = await api.get('properties')
         res.raise_for_status()
         properties = list()
-        for i in res.json():
-            properties.append(simplify_attr(i))
+        for prop in res.json():
+            properties.append(simplify_attr(prop))
         return properties
 
     def get_properties(self):
