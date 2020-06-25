@@ -43,7 +43,7 @@ class Client:
 
         Examples
         --------
-        >>>cli.get_logbooks()
+        >>> cli.get_logbooks()
         [{'DAMA': {'owner': 'olog-logs', 'state': 'Active'}},
          {'Operations': {'owner': 'olog-logs', 'state': 'Active'}}]
 
