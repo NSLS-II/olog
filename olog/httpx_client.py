@@ -8,7 +8,7 @@ from .util import (UncaughtServerError, ensure_name, ensure_time,
 
 class Client:
     def __init__(self, url, user, password):
-        '''A Python client for olog service
+        """A Python client for olog service
 
         Parameters
         ----------
@@ -18,7 +18,7 @@ class Client:
             Your olog service username
         password : str
             Your olog service password
-        '''
+        """
         if not url.endswith('/'):
             url += '/'
         self.user = user
@@ -35,7 +35,7 @@ class Client:
         return logbooks
 
     def get_logbooks(self):
-        '''
+        """
         Returns
         -------
         logbooks : list
@@ -47,7 +47,7 @@ class Client:
         [{'DAMA': {'owner': 'olog-logs', 'state': 'Active'}},
          {'Operations': {'owner': 'olog-logs', 'state': 'Active'}}]
 
-        '''
+        """
         return asyncio.run(self.aget_logbooks())
 
     async def aget_logbook(self, name):
@@ -59,7 +59,7 @@ class Client:
         return simplify_logbook(res.json())
 
     def get_logbook(self, name):
-        '''
+        """
         Parameters
         ----------
         name : str
@@ -75,7 +75,7 @@ class Client:
         >>> cli.get_logbook("TEST')
         {'TEST': {'owner': 'olog-logs', 'state': 'Active'}}
 
-        '''
+        """
         return asyncio.run(self.aget_logbook(name))
 
     async def aput_logbooks(self, names):
@@ -85,7 +85,7 @@ class Client:
         res.raise_for_status()
 
     def put_logbooks(self, logbooks):
-        '''
+        """
         Parameters
         ----------
         logbooks : list
@@ -95,7 +95,7 @@ class Client:
         --------
         >>> cli.put_logbooks(['TEST0', 'TEST1'])
 
-        '''
+        """
         return asyncio.run(self.aput_logbooks(logbooks))
 
     async def aput_logbook(self, name):
@@ -116,7 +116,7 @@ class Client:
         return simplify_logbook(res.json())
 
     def put_logbook(self, name):
-        '''
+        """
         Parameters
         ----------
         name : str
@@ -132,7 +132,7 @@ class Client:
         >>> cli.put_logbook('TEST')
         {'TEST': {'owner': 'admin', 'state': 'Active'}}
 
-        '''
+        """
         return asyncio.run(self.aput_logbook(name))
 
     # Logs
@@ -155,7 +155,7 @@ class Client:
     def get_logs(self, *, desc=None, fuzzy=None, phrase=None, owner=None,
                  start=None, end=None, includeevents=None,
                  logbooks=None, tags=None, properties=None):
-        '''
+        """
         Parameters
         ----------
         desc : a list of str
@@ -192,7 +192,7 @@ class Client:
         Examples
         --------
         >>> cli.get_logs(logbooks='Operations')
-        '''
+        """
         return asyncio.run(self.aget_logs(desc, fuzzy, phrase, owner,
                                           start, end, includeevents,
                                           logbooks, tags))
@@ -204,7 +204,7 @@ class Client:
         return res.json()
 
     def get_log(self, log_id):
-        '''
+        """
         Parameters
         ----------
         log_id : int
@@ -217,7 +217,7 @@ class Client:
         Examples
         --------
         >>> cli.get_log(1)
-        '''
+        """
         return asyncio.run(self.aget_log(log_id))
 
     # Attachments
@@ -227,7 +227,7 @@ class Client:
         return res.content
 
     def get_attachment(self, attachment_id, filename):
-        '''Get attachemnt file based on log id and filename
+        """Get attachemnt file based on log id and filename
 
         Parameters
         ----------
@@ -243,7 +243,7 @@ class Client:
         Examples
         --------
         >>> cli.get_attaachment(1, 'test')
-        '''
+        """
         return asyncio.run(self.aget_attachment(attachment_id, filename))
 
     async def apost_attachment(self, attachment_id, files):
@@ -252,7 +252,7 @@ class Client:
         res.raise_for_status()
 
     def post_attachment(self, attachment_id, files):
-        '''
+        """
         Parameters
         ----------
         attachment_id : int
@@ -265,7 +265,7 @@ class Client:
         >>> files = {'file': open('<FILE>','rb'), 'filename': (None, '<FILENAME>'),
         'fileMetadataDescription': (None, 'This is a attachment file')}
         >>> cli.post_attachment(3, files)
-        '''
+        """
         return asyncio.run(self.apost_attachment(attachment_id, files))
 
     # Tags
@@ -276,7 +276,7 @@ class Client:
         return res.json()
 
     def get_tags(self):
-        '''
+        """
         Returns
         -------
         tags : list
@@ -285,7 +285,7 @@ class Client:
         Examples
         --------
         >>> cli.get_tags()
-        '''
+        """
         return asyncio.run(self.aget_tags())
 
     async def aget_tag(self, name):
@@ -295,7 +295,7 @@ class Client:
         return res.json()
 
     def get_tag(self, name):
-        '''
+        """
         Parameters
         ----------
         name : str
@@ -309,7 +309,7 @@ class Client:
         Examples
         --------
         >>> cli.get_tag('TEST')
-        '''
+        """
         return asyncio.run(self.aget_tag(name))
 
     async def aput_tags(self, names):
@@ -318,7 +318,7 @@ class Client:
         res.raise_for_status()
 
     def put_tags(self, names):
-        '''
+        """
         Parameters
         ----------
 
@@ -328,7 +328,7 @@ class Client:
         Examples
         --------
         >>> cli.put_tags(['TEST0', 'TEST1'])
-        '''
+        """
         return asyncio.run(self.aput_tags(names))
 
     async def aput_tag(self, name):
@@ -338,7 +338,7 @@ class Client:
         return res.json()
 
     def put_tag(self, name):
-        '''
+        """
         Parameters
         ----------
         name : str
@@ -353,7 +353,7 @@ class Client:
         --------
         >>> cli.put_tag('TEST')
         {'name': 'TEST1', 'state': 'Active'}
-        '''
+        """
         return asyncio.run(self.aput_tag(name))
 
     # Properties
@@ -367,7 +367,7 @@ class Client:
         return properties
 
     def get_properties(self):
-        '''
+        """
         Returns
         -------
         properties : list
@@ -376,7 +376,7 @@ class Client:
         Examples
         --------
         >>> cli.get_properties()
-        '''
+        """
         return asyncio.run(self.aget_properties())
 
     async def aget_property(self, name):
@@ -386,7 +386,7 @@ class Client:
         return simplify_attr(res.json())
 
     def get_property(self, name):
-        '''
+        """
         Parameters
         ----------
         name : str
@@ -400,7 +400,7 @@ class Client:
         Examples
         --------
         >>> cli.get_property('TEST')
-        '''
+        """
         return asyncio.run(self.aget_property(name))
 
     async def aput_properties(self, named_attributes):
@@ -415,7 +415,7 @@ class Client:
         res.raise_for_status()
 
     def put_properties(self, named_attributes):
-        '''
+        """
         Parameters
         ----------
 
@@ -426,7 +426,7 @@ class Client:
         Examples
         --------
         >>> cli.put_properties({'TEST0': {'id': None, 'url': None}, 'TEST1':{'id': None, 'url': None}})
-        '''
+        """
         return asyncio.run(self.aput_properties(named_attributes))
 
     async def aput_property(self, name, attributes):
@@ -463,7 +463,7 @@ class Client:
         return simplify_attr(res.json())
 
     def put_property(self, name, attributes):
-        '''
+        """
         Parameters
         ----------
         name : str
@@ -479,5 +479,5 @@ class Client:
         Examples
         --------
         >>> cli.put_property('TEST', {'id': 1, 'url': None})
-        '''
+        """
         return asyncio.run(self.aput_property(name, attributes))
