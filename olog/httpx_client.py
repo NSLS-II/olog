@@ -8,7 +8,7 @@ from .util import (UncaughtServerError, ensure_name, ensure_time,
 
 class Client:
     def __init__(self, url, user, password):
-        '''A Python client of olog service
+        '''A Python client for olog service
 
         Parameters
         ----------
