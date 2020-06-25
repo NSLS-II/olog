@@ -6,7 +6,7 @@ import pytest
 import vcr as _vcr
 
 from olog.httpx_client import Client
-from olog.util import (UncaughtServerError, ensure_name, ensure_time,
+from olog.util import (UncaughtServerError, ensure_name, ensure_value, ensure_time,
                        simplify_attr)
 
 # This stashes Olog server responses in JSON files (one per test)
@@ -193,6 +193,14 @@ def test_put_property_with_error():
 def test_ensure_name():
     with pytest.raises(TypeError):
         ensure_name(1)
+    assert 'foo' == ensure_name('foo')
+
+
+def test_ensure_value():
+    with pytest.raises(TypeError):
+        ensure_value(1)
+    assert ensure_value(None) is None
+    assert 'foo' == ensure_value('foo')
 
 
 def test_ensure_time():

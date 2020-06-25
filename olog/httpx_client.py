@@ -2,7 +2,7 @@ import asyncio
 
 from httpx import AsyncClient
 
-from .util import (UncaughtServerError, ensure_name, ensure_time,
+from .util import (UncaughtServerError, ensure_name, ensure_value, ensure_time,
                    simplify_attr, simplify_logbook)
 
 
@@ -406,7 +406,8 @@ class Client:
     async def aput_properties(self, named_attributes):
         properties = list()
         for name, attributes in named_attributes.items():
-            attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
+            attr_value = [{'name': ensure_name(name), 'value': ensure_value(value)}
+                          for name, value in attributes.items()]
             properties.append(dict({'name': name,
                                     'owner': self.user,
                                     'attributes': attr_value}))

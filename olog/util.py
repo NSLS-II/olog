@@ -36,6 +36,14 @@ def ensure_name(name):
     return name
 
 
+def ensure_value(value):
+    if value is None:
+        return value
+    if not isinstance(value, str):
+        raise TypeError(f'value should be a str or None, {value} is not.')
+    return value
+
+
 def simplify_attr(d):
     d_cp = d.copy()
     d_cp['attributes'] = {e['name']: e['value'] for e in d['attributes']}
