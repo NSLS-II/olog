@@ -197,17 +197,17 @@ class Client:
                                           start, end, includeevents,
                                           logbooks, tags))
 
-    async def aget_log(self, id):
+    async def aget_log(self, log_id):
         async with self._session as api:
-            res = await api.get(f'logs/{id}')
+            res = await api.get(f'logs/{log_id}')
         res.raise_for_status()
         return res.json()
 
-    def get_log(self, id):
+    def get_log(self, log_id):
         '''
         Parameters
         ----------
-        id : int
+        log_id : int
             id number of log
 
         Returns
@@ -218,20 +218,20 @@ class Client:
         --------
         >>> cli.get_log(1)
         '''
-        return asyncio.run(self.aget_log(id))
+        return asyncio.run(self.aget_log(log_id))
 
     # Attachments
-    async def aget_attachment(self, id, filename):
+    async def aget_attachment(self, attachment_id, filename):
         async with self._session as api:
-            res = await api.get(f'logs/attachments/{id}/{filename}')
+            res = await api.get(f'logs/attachments/{attachment_id}/{filename}')
         return res.content
 
-    def get_attachment(self, id, filename):
+    def get_attachment(self, attachment_id, filename):
         '''Get attachemnt file based on log id and filename
 
         Parameters
         ----------
-        id : int
+        attachment_id : int
             id number of log
         filename : str
             name of file
@@ -242,20 +242,20 @@ class Client:
 
         Examples
         --------
-        >>> cli.get_attachment(1, 'test')
+        >>> cli.get_attaachment(1, 'test')
         '''
-        return asyncio.run(self.aget_attachment(id, filename))
+        return asyncio.run(self.aget_attachment(attachment_id, filename))
 
-    async def apost_attachment(self, id, files):
+    async def apost_attachment(self, attachment_id, files):
         async with self._session as api:
-            res = await api.post(f'logs/attachments/{id}', files=files)
+            res = await api.post(f'logs/attachments/{attachment_id}', files=files)
         res.raise_for_status()
 
-    def post_attachment(self, id, files):
+    def post_attachment(self, attachment_id, files):
         '''
         Parameters
         ----------
-        id : int
+        attachment_id : int
             id number of log
         files : dict
             files dictionary including filename, file obj and meta data.
@@ -266,7 +266,7 @@ class Client:
         'fileMetadataDescription': (None, 'This is a attachment file')}
         >>> cli.post_attachment(3, files)
         '''
-        return asyncio.run(self.apost_attachment(id, files))
+        return asyncio.run(self.apost_attachment(attachment_id, files))
 
     # Tags
     async def aget_tags(self):
