@@ -432,11 +432,8 @@ class Client:
 
     async def aput_property(self, name, attributes):
         name = ensure_name(name)
-        # Monitor those keys whose value isn't str.
-        # Convert them to str later since server always covert them and return str.
-        monitor_list = [name for name, value in attributes.items()
-                        if isinstance(value, (int, float))]
-        attr_value = [{'name': ensure_name(name), 'value': value} for name, value in attributes.items()]
+        attr_value = [{'name': ensure_name(name), 'value': ensure_value(value)}
+                      for name, value in attributes.items()]
         property = dict({'name': name,
                          'owner': self.user,
                          'attributes': attr_value})
@@ -452,11 +449,6 @@ class Client:
         for e in property_from_server['attributes']:
             e.pop('state')
         property_from_server.pop('state')
-        # property_cp['attributes'] = sorted(property_cp['attributes'], key=lambda d: d['name'])
-        # Looks server doesn't return sorted attributes
-        for i in property_cp['attributes']:
-            if i['name'] in monitor_list:
-                i['value'] = str(i['value'])
         if property_cp != property_from_server:
             raise UncaughtServerError("No http error was raised but server doesn't successfully put property"
                                       f"you want.Server puts {property_from_server} while you are tring to put"

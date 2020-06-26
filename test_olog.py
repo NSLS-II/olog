@@ -42,7 +42,7 @@ LOGBOOK_NAME = 'Operations'
 PROPERTY = {'name': 'TEST', 'owner': 'admin', 'state': 'Active', 'attributes': {'id': '1', 'url': None}}
 PROPERTIES = {'TEST0': {'id': None, 'url': None}, 'TEST1': {'id': None, 'url': None}}
 PROPERTY_NAME = 'TEST'
-PROPERTY_ATTRIBUTES = {'url': None, 'id': 1}
+PROPERTY_ATTRIBUTES = {'url': None, 'id': '1'}
 INVALID_PROPERTY = {'name': 'Ticket',
                     'owner': 'invalid_name',
                     'state': 'Active',
