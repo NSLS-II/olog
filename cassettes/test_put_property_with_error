@@ -4,8 +4,8 @@
         {
             "request": {
                 "method": "PUT",
-                "uri": "http://10.0.137.22:8080/Olog/properties/Ticket",
-                "body": "{\"name\": \"Ticket\", \"owner\": \"olog-logs\", \"state\": \"Active\", \"attributes\": [{\"name\": \"url\", \"value\": null, \"state\": \"Active\"}, {\"name\": \"id\", \"value\": null, \"state\": \"Active\"}]}",
+                "uri": "http://10.0.137.22:8080/Olog/properties/TEST",
+                "body": "{\"name\": \"TEST\", \"owner\": \"admin\", \"attributes\": [{\"name\": \"url\", \"value\": null}, {\"name\": \"id\", \"value\": 1}]}",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,7 +23,7 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "176"
+                        "110"
                     ],
                     "content-type": [
                         "application/json"
@@ -37,23 +37,23 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "x-xss-protection": [
-                        "1; mode=block"
-                    ],
-                    "date": [
-                        "Thu, 21 May 2020 20:56:01 GMT"
-                    ],
                     "pragma": [
                         "no-cache"
                     ],
-                    "expires": [
-                        "0"
+                    "x-xss-protection": [
+                        "1; mode=block"
                     ],
                     "x-frame-options": [
                         "DENY"
                     ],
                     "cache-control": [
                         "no-cache, no-store, max-age=0, must-revalidate"
+                    ],
+                    "expires": [
+                        "0"
+                    ],
+                    "date": [
+                        "Thu, 11 Jun 2020 21:38:48 GMT"
                     ],
                     "content-type": [
                         "application/json;charset=UTF-8"
@@ -62,7 +62,7 @@
                         "nosniff"
                     ]
                 },
-                "content": "{\"name\":\"A_WRONG_NAME\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"id\",\"value\":null,\"state\":\"Active\"},{\"name\":\"url\",\"value\":null,\"state\":\"Active\"}]}"
+                "content": "{\"name\":\"THIS IS A WRONG NAME\",\"owner\":\"admin\",\"state\":\"Active\",\"attributes\":[{\"name\":\"url\",\"value\":null,\"state\":\"Active\"},{\"name\":\"id\",\"value\":\"1\",\"state\":\"Active\"}]}"
             }
         }
     ]

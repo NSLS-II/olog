@@ -5,7 +5,7 @@
             "request": {
                 "method": "PUT",
                 "uri": "http://10.0.137.22:8080/Olog/logbooks",
-                "body": "[{\"name\": \"Operations\", \"owner\": \"olog-logs\", \"state\": \"Active\"}, {\"name\": \"TEST\", \"owner\": \"olog-logs\", \"state\": \"Active\"}]",
+                "body": "[{\"name\": \"TEST0\", \"owner\": \"admin\"}, {\"name\": \"TEST1\", \"owner\": \"admin\"}]",
                 "headers": {
                     "host": [
                         "10.0.137.22:8080"
@@ -23,7 +23,7 @@
                         "keep-alive"
                     ],
                     "content-length": [
-                        "124"
+                        "74"
                     ],
                     "content-type": [
                         "application/json"
@@ -37,32 +37,32 @@
                     "via": [
                         "1.1 tinyproxy (tinyproxy/1.8.3)"
                     ],
-                    "content-type": [
-                        "application/json;charset=UTF-8"
+                    "pragma": [
+                        "no-cache"
                     ],
                     "x-xss-protection": [
                         "1; mode=block"
                     ],
-                    "x-frame-options": [
-                        "DENY"
+                    "content-type": [
+                        "application/json;charset=UTF-8"
+                    ],
+                    "date": [
+                        "Thu, 11 Jun 2020 21:38:47 GMT"
                     ],
                     "x-content-type-options": [
                         "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
                     ],
                     "cache-control": [
                         "no-cache, no-store, max-age=0, must-revalidate"
                     ],
                     "expires": [
                         "0"
-                    ],
-                    "date": [
-                        "Thu, 21 May 2020 20:56:01 GMT"
-                    ],
-                    "pragma": [
-                        "no-cache"
                     ]
                 },
-                "content": "[{\"name\":\"Operations\",\"owner\":\"olog-logs\",\"state\":\"Active\"},{\"name\":\"TEST\",\"owner\":\"olog-logs\",\"state\":\"Active\"}]"
+                "content": "[{\"name\":\"TEST0\",\"owner\":\"admin\",\"state\":\"Active\"},{\"name\":\"TEST1\",\"owner\":\"admin\",\"state\":\"Active\"}]"
             }
         }
     ]

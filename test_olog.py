@@ -6,7 +6,8 @@ import pytest
 import vcr as _vcr
 
 from olog.httpx_client import Client
-from olog.util import UncaughtServerError, ensure_time
+from olog.util import (UncaughtServerError, ensure_name, ensure_value, ensure_time,
+                       simplify_attr)
 
 # This stashes Olog server responses in JSON files (one per test)
 # so that an actual server does not have to be running.
@@ -24,7 +25,7 @@ vcr = _vcr.VCR(
 RECORDED_URL = "http://10.0.137.22:8080/Olog"
 # Only required if we are re-recording for VCR.
 url = os.environ.get('OLOG_URL', RECORDED_URL)
-user = os.environ.get('OLOG_USER', 'olog-logs')
+user = os.environ.get('OLOG_USER', 'admin')
 password = os.environ.get('OLOG_PASSWORD', '')
 cli = Client(url, user, password)
 
@@ -32,28 +33,16 @@ cli = Client(url, user, password)
 # Various test parameters
 LOG_ID = 1
 
-LOGBOOKS = [{'name': 'Operations', 'owner': 'olog-logs', 'state': 'Active'},
-            {'name': 'TEST', 'owner': 'olog-logs', 'state': 'Active'}]
-LOGBOOK = {'name': 'Operations', 'owner': 'olog-logs', 'state': 'Active'}
+LOGBOOKS = ['TEST0', 'TEST1']
+LOGBOOK = 'TEST'
 INVALID_LOGBOOK = {'name': 'Operations', 'owner': 'invalid_name',
                    'state': 'Active'}
 LOGBOOK_NAME = 'Operations'
 
-PROPS = [{'name': 'Ticket',
-          'owner': 'olog-logs',
-          'state': 'Active',
-          'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
-                         {'name': 'id', 'value': None, 'state': 'Active'}]},
-         {'name': 'TEST',
-          'owner': 'olog-logs',
-          'state': 'Active',
-          'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
-                         {'name': 'id', 'value': None, 'state': 'Active'}]}]
-PROPERTY = {'name': 'Ticket',
-            'owner': 'olog-logs',
-            'state': 'Active',
-            'attributes': [{'name': 'url', 'value': None, 'state': 'Active'},
-                           {'name': 'id', 'value': None, 'state': 'Active'}]}
+PROPERTY = {'name': 'TEST', 'owner': 'admin', 'state': 'Active', 'attributes': {'id': '1', 'url': None}}
+PROPERTIES = {'TEST0': {'id': None, 'url': None}, 'TEST1': {'id': None, 'url': None}}
+PROPERTY_NAME = 'TEST'
+PROPERTY_ATTRIBUTES = {'url': None, 'id': '1'}
 INVALID_PROPERTY = {'name': 'Ticket',
                     'owner': 'invalid_name',
                     'state': 'Active',
@@ -61,7 +50,6 @@ INVALID_PROPERTY = {'name': 'Ticket',
                                     'state': 'Active'},
                                    {'name': 'id', 'value': None,
                                     'state': 'Active'}]}
-PROPERTY_NAME = 'Ticket'
 
 TAG_NAMES = ['Fault', 'TEST']
 TAG = {'name': 'Fault', 'state': 'Active'}
@@ -109,8 +97,6 @@ def test_put_logbooks():
 @vcr.use_cassette()
 def test_put_logbook():
     cli.put_logbook(LOGBOOK)
-    with pytest.raises(ValueError):
-        cli.put_logbook(INVALID_LOGBOOK)
 
 
 @vcr.use_cassette()
@@ -187,14 +173,12 @@ def test_get_property():
 
 @vcr.use_cassette()
 def test_put_properties():
-    cli.put_properties(PROPS)
+    cli.put_properties(PROPERTIES)
 
 
 @vcr.use_cassette()
 def test_put_property():
-    cli.put_property(PROPERTY)
-    with pytest.raises(ValueError):
-        cli.put_logbook(INVALID_PROPERTY)
+    assert PROPERTY == cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
 
 
 @vcr.use_cassette()
@@ -203,7 +187,20 @@ def test_put_property_with_error():
     # response has been manually edited to be inconsistent
     # with the request to exercise this code path
     with pytest.raises(UncaughtServerError):
-        cli.put_property(PROPERTY)
+        cli.put_property(PROPERTY_NAME, PROPERTY_ATTRIBUTES)
+
+
+def test_ensure_name():
+    with pytest.raises(TypeError):
+        ensure_name(1)
+    assert 'foo' == ensure_name('foo')
+
+
+def test_ensure_value():
+    with pytest.raises(TypeError):
+        ensure_value(1)
+    assert ensure_value(None) is None
+    assert 'foo' == ensure_value('foo')
 
 
 def test_ensure_time():
@@ -219,3 +216,10 @@ def test_ensure_time():
         assert '2015-01-01 00:00:00.000' == ensure_time(time - diff*3600)
     with pytest.raises(ValueError):
         ensure_time('ABC')
+
+
+def test_simplify_attr():
+    before = {'attributes': [{'name': 'id', 'value': 1}]}
+    after = simplify_attr(before)
+    real = {'attributes': {'id': 1}}
+    assert real == after

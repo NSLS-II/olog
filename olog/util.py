@@ -30,5 +30,31 @@ def ensure_time(time):
     return time.isoformat(sep=' ', timespec='milliseconds')
 
 
+def ensure_name(name):
+    if not isinstance(name, str):
+        raise TypeError(f'name should be a str, {name} is not a str.')
+    return name
+
+
+def ensure_value(value):
+    if value is None:
+        return value
+    if not isinstance(value, str):
+        raise TypeError(f'value should be a str or None, {value} is not.')
+    return value
+
+
+def simplify_attr(d):
+    d_cp = d.copy()
+    d_cp['attributes'] = {e['name']: e['value'] for e in d['attributes']}
+    return d_cp
+
+
+def simplify_logbook(logbook):
+    logbook_cp = logbook.copy()
+    name = logbook_cp.pop('name')
+    return dict({name: logbook_cp})
+
+
 class UncaughtServerError(Exception):
     pass
